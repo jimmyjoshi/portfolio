@@ -10,7 +10,7 @@ import UIKit
 
 class EntitiesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var tblEntity: UITableView!
-    var intType : Int = 0
+    //var intType : Int = 0
     var arrEntityData = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class EntitiesViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func setTemporaryData() {
         arrEntityData = NSMutableArray()
         
-        if intType == 0 {
+       
         
         arrEntityData.add([kTitleKey: "Fund01",kDescriptionKey: "This is new description that has been written"])
         arrEntityData.add([kTitleKey: "Fund02",kDescriptionKey: "This is new description that has been written"])
@@ -45,15 +45,7 @@ class EntitiesViewController: UIViewController,UITableViewDelegate,UITableViewDa
         arrEntityData.add([kTitleKey: "Fund08",kDescriptionKey: "This is new description that has been written in order to check whether it if functionging or not"])
             
             
-        }
-        else if intType == 1 {
-            arrEntityData.add([kTitleKey: "Home",kImageKey: "homeIcon"])
-            arrEntityData.add([kTitleKey: "Insurance",kImageKey: "insuranceIcon"])
-            arrEntityData.add([kTitleKey: "Auto",kImageKey: "autoIcon"])
-            arrEntityData.add([kTitleKey: "Credit Card",kImageKey: "cardIcon"])
-            arrEntityData.add([kTitleKey: "Family",kImageKey: "familyIcon"])
-            arrEntityData.add([kTitleKey: "Education",kImageKey: "educationIcon"])
-        }
+        
         tblEntity.reloadData()
     }
     
@@ -78,54 +70,26 @@ class EntitiesViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if intType == 0 {
+        
             return UITableViewAutomaticDimension
-        }
-        else if intType == 1 {
-            return 75
-        }
-        return 0
+        
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var mainCell = UITableViewCell()
         
-        
-        if intType == 0 {
         let cell : entityCell = tableView.dequeueReusableCell(withIdentifier: kEntityCellIdentifier, for: indexPath) as! entityCell
         let dictEntity : NSDictionary = arrEntityData[indexPath.row] as! NSDictionary
-        
-        
         if let title = dictEntity.value(forKey: kTitleKey) {
             cell.lblTitle.text = "\(title)"
         }
-        
-        
         if let description = dictEntity.value(forKey: kDescriptionKey) {
             cell.lblDescription.text = "\(description)"
             cell.lblDescription.sizeToFit()
         }
-        
-            mainCell = cell
-            
-        }
-        else if intType == 1 {
-            let cell : documentCell = tableView.dequeueReusableCell(withIdentifier: kDocumentCellIdentifier, for: indexPath) as! documentCell
-            let dictEntity : NSDictionary = arrEntityData[indexPath.row] as! NSDictionary
-            
-            if let title = dictEntity.value(forKey: kTitleKey) {
-                cell.lblTitle.text = "\(title)"
-            }
-            
-            if let img = dictEntity.value(forKey: kImageKey) {
-                cell.imgTopic.image = UIImage(named: "\(img)")
-            }
-            
-            mainCell = cell
-        }
-        return mainCell
+        return cell
     }
 }
 

@@ -80,6 +80,7 @@
 		D567EE9E1F5A9AC000B647FF /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D567EE9D1F5A9AC000B647FF /* NewsViewController.swift */; };
 		D59605CC1F5AC66100AE343B /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59605CB1F5AC66100AE343B /* ContactsViewController.swift */; };
 		D59605CE1F5AC8A100AE343B /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59605CD1F5AC8A100AE343B /* DocumentsViewController.swift */; };
+		D5F2589D1F5B0B4200429374 /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F2589C1F5B0B4200429374 /* TeamViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -185,6 +186,7 @@
 		D567EE9D1F5A9AC000B647FF /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		D59605CB1F5AC66100AE343B /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		D59605CD1F5AC8A100AE343B /* DocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
+		D5F2589C1F5B0B4200429374 /* TeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 				D567EE9D1F5A9AC000B647FF /* NewsViewController.swift */,
 				D59605CB1F5AC66100AE343B /* ContactsViewController.swift */,
 				D59605CD1F5AC8A100AE343B /* DocumentsViewController.swift */,
+				D5F2589C1F5B0B4200429374 /* TeamViewController.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3EDF1D91F55D8F800D5D82D /* SDWebImageDecoder.m in Sources */,
+				D5F2589D1F5B0B4200429374 /* TeamViewController.swift in Sources */,
 				D3EDF1FD1F55D8F800D5D82D /* Notifications.swift in Sources */,
 				D3EDF1DC1F55D8F800D5D82D /* SDWebImageManager.m in Sources */,
 				D3EDF2041F55D8F800D5D82D /* SessionDelegate.swift in Sources */,

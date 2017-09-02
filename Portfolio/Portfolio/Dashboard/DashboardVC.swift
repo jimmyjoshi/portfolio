@@ -26,10 +26,15 @@ class DashboardVC: UIViewController {
     {
         let storyTab = UIStoryboard(name: "Main", bundle: nil)
         let objEntity  : EntitiesViewController = storyTab.instantiateViewController(withIdentifier: "EntitiesViewController") as! EntitiesViewController
-        objEntity.intType = 0
         self.navigationController?.pushViewController(objEntity, animated: true)
     }
 
+    @IBAction func btnTeamClicked(sender: UIButton) {
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objTeam  : TeamViewController = storyTab.instantiateViewController(withIdentifier: "TeamViewController") as! TeamViewController
+        self.navigationController?.pushViewController(objTeam, animated: true)
+    }
+    
     @IBAction func btnNewsClicked(sender: UIButton) {
         
     }

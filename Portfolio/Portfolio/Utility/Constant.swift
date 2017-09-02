@@ -145,6 +145,16 @@ var kPostKey = "Post"
 var kImageKey = "Image"
 var kCompanyNameKey = "CompanyName"
 
+
 //MARK:- Document Screen Constants
 var kDocumentCellIdentifier = "documentCell"
+
+//MARK:- Team Screen Constants
+var kTeamCellIdentifier = "teamCell"
+var kTeamNameKey = "Name"
+var kTeamDescriptionKey = "Description"
+var kTeamStarKey = "Star"
+var kTeamImageKey = "Image"
+
+
 
