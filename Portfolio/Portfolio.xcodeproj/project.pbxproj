@@ -14,6 +14,8 @@
 		D3307B541F55D3B9007736A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3307B521F55D3B9007736A4 /* LaunchScreen.storyboard */; };
 		D3307B5D1F55D5DB007736A4 /* SJSwiftSideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3307B5C1F55D5DB007736A4 /* SJSwiftSideMenuController.swift */; };
 		D3307B5F1F55D67E007736A4 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3307B5E1F55D67E007736A4 /* SideMenuController.swift */; };
+		D3DCA04D1F5727600070869A /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DCA04C1F5727600070869A /* ForgotPasswordVC.swift */; };
+		D3DCA0501F57320F0070869A /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DCA04F1F57320F0070869A /* DashboardVC.swift */; };
 		D3EDF1D11F55D8F700D5D82D /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EDF1711F55D8F700D5D82D /* AppUtils.swift */; };
 		D3EDF1D21F55D8F700D5D82D /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EDF1721F55D8F700D5D82D /* Constant.swift */; };
 		D3EDF1D31F55D8F700D5D82D /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDF1751F55D8F700D5D82D /* MKAnnotationView+WebCache.m */; };
@@ -74,7 +76,6 @@
 		D3EDF20A1F55D8F800D5D82D /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDF1CC1F55D8F700D5D82D /* JVFloatLabeledTextField.m */; };
 		D3EDF20B1F55D8F800D5D82D /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDF1CE1F55D8F700D5D82D /* JVFloatLabeledTextView.m */; };
 		D3EDF20C1F55D8F800D5D82D /* NSString+TextDirectionality.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDF1D01F55D8F700D5D82D /* NSString+TextDirectionality.m */; };
-		D3EDF24E1F55E1D000D5D82D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EDF24D1F55E1D000D5D82D /* LoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,8 @@
 		D3307B551F55D3B9007736A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3307B5C1F55D5DB007736A4 /* SJSwiftSideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJSwiftSideMenuController.swift; sourceTree = "<group>"; };
 		D3307B5E1F55D67E007736A4 /* SideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
+		D3DCA04C1F5727600070869A /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		D3DCA04F1F57320F0070869A /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		D3EDF1711F55D8F700D5D82D /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		D3EDF1721F55D8F700D5D82D /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		D3EDF1741F55D8F700D5D82D /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -174,7 +177,6 @@
 		D3EDF1CF1F55D8F700D5D82D /* NSString+TextDirectionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TextDirectionality.h"; sourceTree = "<group>"; };
 		D3EDF1D01F55D8F700D5D82D /* NSString+TextDirectionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TextDirectionality.m"; sourceTree = "<group>"; };
 		D3EDF24C1F55DAE000D5D82D /* Portfolio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Portfolio-Bridging-Header.h"; sourceTree = "<group>"; };
-		D3EDF24D1F55E1D000D5D82D /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +209,7 @@
 		D3307B481F55D3B9007736A4 /* Portfolio */ = {
 			isa = PBXGroup;
 			children = (
+				D3DCA04E1F5732000070869A /* Dashboard */,
 				D3EDF1701F55D8F700D5D82D /* Utility */,
 				D3EDF19B1F55D8F700D5D82D /* IQKeyboardManagerSwift */,
 				D3EDF1B31F55D8F700D5D82D /* WebServiceClass */,
@@ -214,7 +217,7 @@
 				D3307B5B1F55D5DB007736A4 /* Sidebar */,
 				D3307B491F55D3B9007736A4 /* AppDelegate.swift */,
 				D3307B4B1F55D3B9007736A4 /* ViewController.swift */,
-				D3EDF24D1F55E1D000D5D82D /* LoginVC.swift */,
+				D3DCA04C1F5727600070869A /* ForgotPasswordVC.swift */,
 				D3307B4D1F55D3B9007736A4 /* Main.storyboard */,
 				D3307B501F55D3B9007736A4 /* Assets.xcassets */,
 				D3307B521F55D3B9007736A4 /* LaunchScreen.storyboard */,
@@ -231,6 +234,14 @@
 				D3307B5C1F55D5DB007736A4 /* SJSwiftSideMenuController.swift */,
 			);
 			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		D3DCA04E1F5732000070869A /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				D3DCA04F1F57320F0070869A /* DashboardVC.swift */,
+			);
+			path = Dashboard;
 			sourceTree = "<group>";
 		};
 		D3EDF1701F55D8F700D5D82D /* Utility */ = {
@@ -490,6 +501,7 @@
 				D3EDF1E21F55D8F800D5D82D /* UIImageView+HighlightedWebCache.m in Sources */,
 				D3EDF1F11F55D8F800D5D82D /* IQBarButtonItem.swift in Sources */,
 				D3EDF20C1F55D8F800D5D82D /* NSString+TextDirectionality.m in Sources */,
+				D3DCA0501F57320F0070869A /* DashboardVC.swift in Sources */,
 				D3EDF2071F55D8F800D5D82D /* Timeline.swift in Sources */,
 				D3307B5D1F55D5DB007736A4 /* SJSwiftSideMenuController.swift in Sources */,
 				D3EDF2081F55D8F800D5D82D /* Validation.swift in Sources */,
@@ -500,7 +512,6 @@
 				D3EDF1DD1F55D8F800D5D82D /* SDWebImagePrefetcher.m in Sources */,
 				D3EDF1F31F55D8F800D5D82D /* IQTitleBarButtonItem.swift in Sources */,
 				D3EDF2061F55D8F800D5D82D /* TaskDelegate.swift in Sources */,
-				D3EDF24E1F55E1D000D5D82D /* LoginVC.swift in Sources */,
 				D3EDF1ED1F55D8F800D5D82D /* IQKeyboardManagerConstantsInternal.swift in Sources */,
 				D3EDF1E51F55D8F800D5D82D /* UIView+WebCacheOperation.m in Sources */,
 				D3EDF1EF1F55D8F800D5D82D /* IQKeyboardReturnKeyHandler.swift in Sources */,
@@ -528,6 +539,7 @@
 				D3EDF1DF1F55D8F800D5D82D /* UIImage+GIF.m in Sources */,
 				D3EDF1F01F55D8F800D5D82D /* IQTextView.swift in Sources */,
 				D3EDF2051F55D8F800D5D82D /* SessionManager.swift in Sources */,
+				D3DCA04D1F5727600070869A /* ForgotPasswordVC.swift in Sources */,
 				D3EDF20A1F55D8F800D5D82D /* JVFloatLabeledTextField.m in Sources */,
 				D3EDF1F71F55D8F800D5D82D /* AFError.swift in Sources */,
 				D3EDF1EE1F55D8F800D5D82D /* IQKeyboardManager.swift in Sources */,

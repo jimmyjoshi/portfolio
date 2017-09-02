@@ -1,14 +1,14 @@
 //
-//  LoginVC.swift
+//  ForgotPasswordVC.swift
 //  Portfolio
 //
-//  Created by Yash on 29/08/17.
+//  Created by Yash on 30/08/17.
 //  Copyright © 2017 Niyati. All rights reserved.
 //
 
 import UIKit
 
-class LoginVC: UIViewController {
+class ForgotPasswordVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,11 @@ class LoginVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    @IBAction func btnbackPressed()
+    {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+
 
     /*
     // MARK: - Navigation
