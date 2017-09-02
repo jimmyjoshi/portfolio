@@ -21,15 +21,35 @@ class DashboardVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func btnEntitiesClicked(sender: UIButton)
+    {
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objEntity  : EntitiesViewController = storyTab.instantiateViewController(withIdentifier: "EntitiesViewController") as! EntitiesViewController
+        objEntity.intType = 0
+        self.navigationController?.pushViewController(objEntity, animated: true)
     }
-    */
 
+    @IBAction func btnNewsClicked(sender: UIButton) {
+        
+    }
+    
+    @IBAction func btnCompaniesClicked(sender: UIButton) {
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objNewsVC : NewsViewController = storyTab.instantiateViewController(withIdentifier: "NewsViewController") as! NewsViewController
+        objNewsVC.intType = 0
+        self.navigationController?.pushViewController(objNewsVC, animated: true)
+    }
+    
+    @IBAction func btnDocumentsClicked(sender: UIButton) {
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objEntity  : DocumentsViewController = storyTab.instantiateViewController(withIdentifier: "DocumentsViewController") as! DocumentsViewController
+        self.navigationController?.pushViewController(objEntity, animated: true)
+    }
+    
+    @IBAction func btnContactsClicked(sender: UIButton) {
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objNewsVC : ContactsViewController = storyTab.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+        self.navigationController?.pushViewController(objNewsVC, animated: true)
+    }
 }

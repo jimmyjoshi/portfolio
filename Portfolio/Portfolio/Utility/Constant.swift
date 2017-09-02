@@ -127,3 +127,24 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 }
+
+
+//MARK:- Entity Screen Constants
+var kTitleKey = "Title"
+var kDescriptionKey = "Description"
+var kEntityCellIdentifier = "entityCell1"
+
+//MARK:- News Screen Constants
+var kNewsCellIdentifier = "newsCell"
+var kDateKey = "Date"
+
+//MARK:- Contact Screen Constants
+var kContactsCellIdentifier = "contactCell"
+var kNameKey = "Name"
+var kPostKey = "Post"
+var kImageKey = "Image"
+var kCompanyNameKey = "CompanyName"
+
+//MARK:- Document Screen Constants
+var kDocumentCellIdentifier = "documentCell"
+
