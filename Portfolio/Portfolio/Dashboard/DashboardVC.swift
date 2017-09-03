@@ -29,7 +29,7 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
         arrNews = NSMutableArray()
         arrNews.add([kNewsTitleKey: "Lorel Ipsum delivat checko",kNewsDescriptionKey: "Porin pursus ex, accumsain at maximus non, Curabitus fermentum cursus quis nulla.",kNewsDateKey: "24Jan,17"])
         arrNews.add([kNewsTitleKey: "Delivat checko Lorel Ipsum",kNewsDescriptionKey: "Porin pursus ex, accumsain at maximus non, Curabitus fermentum cursus quis nulla.",kNewsDateKey: "29Jan,17"])
-        pgControl.currentPage = 1
+        pgControl.currentPage = 0
         pgControl.numberOfPages = arrNews.count
         colNews.reloadData()
         
