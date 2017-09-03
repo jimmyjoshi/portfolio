@@ -12,8 +12,6 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
     @IBOutlet var tblNews: UITableView!
     
     @IBOutlet var txtSearch: UITextField!
-    
-    var intType : Int = 0
     var arrNews = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()

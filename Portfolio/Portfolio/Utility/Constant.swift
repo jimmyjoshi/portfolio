@@ -127,7 +127,12 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 }
+//MARK:- Dashboard Constants
+var kNewsTitleKey = "Title"
+var kNewsDescriptionKey = "Description"
+var kNewsDateKey = "Date"
 
+var kNewsCollCellIdentifier = "collNews"
 
 //MARK:- Entity Screen Constants
 var kTitleKey = "Title"
@@ -156,5 +161,10 @@ var kTeamDescriptionKey = "Description"
 var kTeamStarKey = "Star"
 var kTeamImageKey = "Image"
 
-
+//MARK:- Company Screen Constants
+var kCompanyNamKey = "Name"
+var kCompanyAmountKey = "Amount"
+var kCompanyPercentKey = "Percent"
+var kCompanyCellIdentifier = "companyCell"
+var kCompanyHeaderIdentifier = "headerCell"
 

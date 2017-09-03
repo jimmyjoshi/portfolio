@@ -80,6 +80,7 @@
 		D567EE9E1F5A9AC000B647FF /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D567EE9D1F5A9AC000B647FF /* NewsViewController.swift */; };
 		D59605CC1F5AC66100AE343B /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59605CB1F5AC66100AE343B /* ContactsViewController.swift */; };
 		D59605CE1F5AC8A100AE343B /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59605CD1F5AC8A100AE343B /* DocumentsViewController.swift */; };
+		D5B799FD1F5C596800BB1A9E /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B799FC1F5C596800BB1A9E /* CompanyViewController.swift */; };
 		D5F2589D1F5B0B4200429374 /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F2589C1F5B0B4200429374 /* TeamViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -186,6 +187,7 @@
 		D567EE9D1F5A9AC000B647FF /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		D59605CB1F5AC66100AE343B /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		D59605CD1F5AC8A100AE343B /* DocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
+		D5B799FC1F5C596800BB1A9E /* CompanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 		D5F2589C1F5B0B4200429374 /* TeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,6 +240,7 @@
 				D59605CB1F5AC66100AE343B /* ContactsViewController.swift */,
 				D59605CD1F5AC8A100AE343B /* DocumentsViewController.swift */,
 				D5F2589C1F5B0B4200429374 /* TeamViewController.swift */,
+				D5B799FC1F5C596800BB1A9E /* CompanyViewController.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				D3EDF1D51F55D8F800D5D82D /* NSImage+WebCache.m in Sources */,
 				D3EDF1DF1F55D8F800D5D82D /* UIImage+GIF.m in Sources */,
 				D3EDF1F01F55D8F800D5D82D /* IQTextView.swift in Sources */,
+				D5B799FD1F5C596800BB1A9E /* CompanyViewController.swift in Sources */,
 				D3EDF2051F55D8F800D5D82D /* SessionManager.swift in Sources */,
 				D3DCA04D1F5727600070869A /* ForgotPasswordVC.swift in Sources */,
 				D3EDF20A1F55D8F800D5D82D /* JVFloatLabeledTextField.m in Sources */,
