@@ -139,6 +139,15 @@ var kTitleKey = "Title"
 var kDescriptionKey = "Description"
 var kEntityCellIdentifier = "entityCell1"
 
+//MARK:- Entity Detail Screen Constants
+var kEntityDetailHeaderCellIdentifier = "headerCell"
+var kEntityDetailCompanyCellIdentifier = "companyDetailCell"
+var kEntityDetailCompanyTitleNameKey = "Title"
+var kEntityDetailCompanyNameKey = "Name"
+var kEntityDetailCompanyAmountKey = "Amount"
+var kEntityDetailCompanyPerKey = "Percent"
+var kEntityDetailCompanyArrKey = "CompanyArray"
+
 //MARK:- News Screen Constants
 var kNewsCellIdentifier = "newsCell"
 var kDateKey = "Date"
@@ -160,6 +169,13 @@ var kTeamNameKey = "Name"
 var kTeamDescriptionKey = "Description"
 var kTeamStarKey = "Star"
 var kTeamImageKey = "Image"
+
+//MARK:- Team Detail Screen Constants
+var kTeamMemberCellIdentifier = "teamMemberCell"
+var kTeamMemberNameKey = "Name"
+var kTeamMemberImageKey = "Image"
+var kTeamMemberPostKey = "Post"
+var kTeamMemberContactNoKey = "PhoneNo"
 
 //MARK:- Company Screen Constants
 var kCompanyNamKey = "Name"

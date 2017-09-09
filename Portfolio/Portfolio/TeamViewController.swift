@@ -56,7 +56,7 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
-    //MARK:-
+    //MARK:- Table View Delegate Methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -70,6 +70,9 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objTeamDetail  : TeamDetailViewController = storyTab.instantiateViewController(withIdentifier: "TeamDetailViewController") as! TeamDetailViewController
+        self.navigationController?.pushViewController(objTeamDetail, animated: true)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : teamCell = tableView.dequeueReusableCell(withIdentifier: kTeamCellIdentifier, for: indexPath) as! teamCell
