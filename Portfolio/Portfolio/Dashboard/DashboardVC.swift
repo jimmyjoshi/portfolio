@@ -73,6 +73,12 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
         self.navigationController?.pushViewController(objNewsVC, animated: true)
     }
     
+    @IBAction func btnFinancialClicked(sender: UIButton) {
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objFin : FinancialSummaryViewController = storyTab.instantiateViewController(withIdentifier: "FinancialSummaryViewController") as! FinancialSummaryViewController
+        self.navigationController?.pushViewController(objFin, animated: true)
+    }
+    
     //MARK:- Collection View delegate methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

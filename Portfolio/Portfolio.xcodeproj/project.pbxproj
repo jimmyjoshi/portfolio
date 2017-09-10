@@ -80,6 +80,7 @@
 		D567EE9E1F5A9AC000B647FF /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D567EE9D1F5A9AC000B647FF /* NewsViewController.swift */; };
 		D57B9D321F62FB9100BE44FB /* TeamDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B9D311F62FB9100BE44FB /* TeamDetailViewController.swift */; };
 		D57B9D341F6315EB00BE44FB /* EntityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57B9D331F6315EB00BE44FB /* EntityDetailViewController.swift */; };
+		D5902AE61F65645E00AE2F1A /* FinancialSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5902AE51F65645E00AE2F1A /* FinancialSummaryViewController.swift */; };
 		D59605CC1F5AC66100AE343B /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59605CB1F5AC66100AE343B /* ContactsViewController.swift */; };
 		D59605CE1F5AC8A100AE343B /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59605CD1F5AC8A100AE343B /* DocumentsViewController.swift */; };
 		D5B799FD1F5C596800BB1A9E /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B799FC1F5C596800BB1A9E /* CompanyViewController.swift */; };
@@ -189,6 +190,7 @@
 		D567EE9D1F5A9AC000B647FF /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		D57B9D311F62FB9100BE44FB /* TeamDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailViewController.swift; sourceTree = "<group>"; };
 		D57B9D331F6315EB00BE44FB /* EntityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityDetailViewController.swift; sourceTree = "<group>"; };
+		D5902AE51F65645E00AE2F1A /* FinancialSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinancialSummaryViewController.swift; path = Dashboard/FinancialSummaryViewController.swift; sourceTree = "<group>"; };
 		D59605CB1F5AC66100AE343B /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		D59605CD1F5AC8A100AE343B /* DocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		D5B799FC1F5C596800BB1A9E /* CompanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				D3EDF24C1F55DAE000D5D82D /* Portfolio-Bridging-Header.h */,
 				D567EE9B1F5A816F00B647FF /* EntitiesViewController.swift */,
 				D567EE9D1F5A9AC000B647FF /* NewsViewController.swift */,
+				D5902AE51F65645E00AE2F1A /* FinancialSummaryViewController.swift */,
 				D59605CB1F5AC66100AE343B /* ContactsViewController.swift */,
 				D59605CD1F5AC8A100AE343B /* DocumentsViewController.swift */,
 				D5F2589C1F5B0B4200429374 /* TeamViewController.swift */,
@@ -561,6 +564,7 @@
 				D3EDF1E71F55D8F800D5D82D /* IQUIScrollView+Additions.swift in Sources */,
 				D3EDF1E01F55D8F800D5D82D /* UIImage+MultiFormat.m in Sources */,
 				D3EDF1D31F55D8F700D5D82D /* MKAnnotationView+WebCache.m in Sources */,
+				D5902AE61F65645E00AE2F1A /* FinancialSummaryViewController.swift in Sources */,
 				D3307B4A1F55D3B9007736A4 /* AppDelegate.swift in Sources */,
 				D567EE9C1F5A816F00B647FF /* EntitiesViewController.swift in Sources */,
 				D3EDF1D21F55D8F700D5D82D /* Constant.swift in Sources */,

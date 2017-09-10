@@ -184,3 +184,15 @@ var kCompanyPercentKey = "Percent"
 var kCompanyCellIdentifier = "companyCell"
 var kCompanyHeaderIdentifier = "headerCell"
 
+//Mark:- Financial Summary Constants
+var kHeaderTitleKey = "Title"
+var kFinancialCompanyNameKey = "Name"
+var kFinancialCompanyDescKey = "Desc"
+var kFinancialDetailArrKey = "DetailArray"
+var kFinancialHeaderCellIdentifier = "financialHeaderCell"
+var kFinancialDetailIdentifier = "financialDetailCell"
+var kFinancialCompanyAmountKey = "Amount"
+var kFinancialCashMainCellIdentifier = "cashMainCell"
+var kFinancialCashDetailCellIdentifier = "cashDetailCell"
+
+
