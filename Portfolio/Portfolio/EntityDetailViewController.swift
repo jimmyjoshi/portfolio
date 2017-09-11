@@ -27,7 +27,8 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     var intRowHt : Int = 39
     
     var arrCompanyData = NSMutableArray()
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setTemporaryValues()
@@ -35,7 +36,8 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         //htMainContentVw.constant = 313
     }
 
-    func setTemporaryValues() {
+    func setTemporaryValues()
+    {
         lblEntityName.text = "Entity 1"
         lblEntityDetail.text = "This is temporary fund that has been set to check the validity"
         
@@ -47,21 +49,34 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         setCompanyData()
     }
     
-    func setCompanyData() {
+    func setCompanyData()
+    {
         var arrTempArray = NSMutableArray()
-        
         arrTempArray.add([kEntityDetailCompanyNameKey: "Morgan Pvt",kEntityDetailCompanyAmountKey: "$45,000",kEntityDetailCompanyPerKey: "22%"])
         arrTempArray.add([kEntityDetailCompanyNameKey: "Reliance Capital Pvt",kEntityDetailCompanyAmountKey: "$30,000",kEntityDetailCompanyPerKey: "15%"])
         arrTempArray.add([kEntityDetailCompanyNameKey: "Morgan Chase",kEntityDetailCompanyAmountKey: "$85",kEntityDetailCompanyPerKey: "19%"])
         
-        
         arrCompanyData = NSMutableArray()
-        arrCompanyData.add([kEntityDetailCompanyTitleNameKey: "Real Estate","isSelected": "0",kEntityDetailCompanyArrKey: arrTempArray])
-        arrCompanyData.add([kEntityDetailCompanyTitleNameKey: "Cooper","isSelected": "0",kEntityDetailCompanyArrKey: arrTempArray])
-        arrCompanyData.add([kEntityDetailCompanyTitleNameKey: "Hedge Fund","isSelected": "0",kEntityDetailCompanyArrKey: arrTempArray])
+        var dicttemp = NSMutableDictionary()
+        dicttemp.setValue("Real Estate", forKey: kEntityDetailCompanyTitleNameKey)
+        dicttemp.setValue("0", forKey: "isSelected")
+        dicttemp.setValue(arrTempArray, forKey: kEntityDetailCompanyArrKey)
+        arrCompanyData.add(dicttemp)
         
-        htCompanyTable.constant = 474.0//CGFloat(calculateHeaderRows())
-        htMainContentVw.constant = 300.0
+        dicttemp = NSMutableDictionary()
+        dicttemp.setValue("Cooper", forKey: kEntityDetailCompanyTitleNameKey)
+        dicttemp.setValue("0", forKey: "isSelected")
+        dicttemp.setValue(arrTempArray, forKey: kEntityDetailCompanyArrKey)
+        arrCompanyData.add(dicttemp)
+        
+        dicttemp = NSMutableDictionary()
+        dicttemp.setValue("Hedge Fund", forKey: kEntityDetailCompanyTitleNameKey)
+        dicttemp.setValue("0", forKey: "isSelected")
+        dicttemp.setValue(arrTempArray, forKey: kEntityDetailCompanyArrKey)
+        arrCompanyData.add(dicttemp)
+        
+        htCompanyTable.constant = (CGFloat(arrCompanyData.count * 41))
+        htMainContentVw.constant = 350 + htCompanyTable.constant
         tblCompany.reloadData()
     }
     override func didReceiveMemoryWarning() {
@@ -75,19 +90,9 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func btnSettingsClicked(sender: UIButton) {
-        
-    }
-    func calculateHeaderRows() -> Int
+    @IBAction func btnSettingsClicked(sender: UIButton)
     {
-        let intHeader : Int = arrCompanyData.count
-        var intRow : Int = 0
         
-        for arr in arrCompanyData {
-            let tmpArr : NSArray = (arr as! NSDictionary).value(forKey: "kEntityDetailCompanyArrKey") as! NSArray
-            intRow = intRow + tmpArr.count
-        }
-        return ((intHeaderHt * intHeader) + (intRowHt * intRow))
     }
     //MARK:- Table View Delegate Method
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -96,56 +101,89 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let dict : NSDictionary = arrCompanyData[section] as! NSDictionary
-        if let arr = dict.value(forKey: kEntityDetailCompanyArrKey){
-            var tmpArray = arr as! NSMutableArray
-            return tmpArray.count
+        let dict : NSMutableDictionary = arrCompanyData[section] as! NSMutableDictionary
+        if dict["isSelected"] as! String == "1"
+        {
+            if let arr = dict.value(forKey: kEntityDetailCompanyArrKey)
+            {
+                let tmpArray = arr as! NSMutableArray
+                return tmpArray.count
+            }
         }
         return 0
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
         return CGFloat(intRowHt)//39
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
         let cell : headerCell = tableView.dequeueReusableCell(withIdentifier: kEntityDetailHeaderCellIdentifier) as! headerCell
-        let dict : NSDictionary = arrCompanyData[section] as! NSDictionary
+        let dict : NSMutableDictionary = arrCompanyData[section] as! NSMutableDictionary
         if let name = dict.value(forKey: kEntityDetailCompanyTitleNameKey){
             cell.lblTitle.text = "\(name)"
         }
+        
+        cell.btnAdd.addTarget(self, action: #selector(self.ExpandCell(_:)), for: .touchUpInside)
+        cell.btnAdd.tag = section
+
         return cell.contentView
     }
     
+    @IBAction func ExpandCell(_ sender: UIButton)
+    {
+        let dict  = arrCompanyData[sender.tag] as! NSMutableDictionary
+        dict.setValue("1", forKey: "isSelected")
+        arrCompanyData.replaceObject(at: sender.tag, with: dict)
+        
+        let resultPredicate = NSPredicate(format: "isSelected contains[c] %@", "1")
+        let temparr = self.arrCompanyData.filtered(using: resultPredicate) as NSArray
+        
+        htCompanyTable.constant = (CGFloat(arrCompanyData.count * 41)) + (CGFloat((temparr.count * 3) * 41))
+        htMainContentVw.constant = 350 + htCompanyTable.constant
+        
+        tblCompany.reloadData()
+    }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
         return CGFloat(intHeaderHt)//41
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell : companyDetailCell = tableView.dequeueReusableCell(withIdentifier: kEntityDetailCompanyCellIdentifier, for: indexPath) as! companyDetailCell
-        let dictMain : NSDictionary = arrCompanyData[indexPath.section] as! NSDictionary
+        let dictMain : NSMutableDictionary = arrCompanyData[indexPath.section] as! NSMutableDictionary
         let dicCompany : NSDictionary = (dictMain.value(forKey: kEntityDetailCompanyArrKey) as! NSArray).object(at: indexPath.row) as! NSDictionary
-        if let name = dicCompany.value(forKey: kEntityDetailCompanyNameKey) {
+        if let name = dicCompany.value(forKey: kEntityDetailCompanyNameKey)
+        {
             cell.lblCompanyName.text = "\(name)"
         }
-        if let amount = dicCompany.value(forKey: kEntityDetailCompanyAmountKey) {
+        if let amount = dicCompany.value(forKey: kEntityDetailCompanyAmountKey)
+        {
             cell.lblMoneyInvested.text = "\(amount)"
         }
-        if let percent = dicCompany.value(forKey: kEntityDetailCompanyPerKey) {
+        if let percent = dicCompany.value(forKey: kEntityDetailCompanyPerKey)
+        {
             cell.lblPercent.text = "\(percent)"
         }
         return cell
     }
 }
 
-class headerCell : UITableViewCell {
+class headerCell : UITableViewCell
+{
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var btnAdd: UIButton!
 }
 
-class companyDetailCell : UITableViewCell {
+class companyDetailCell : UITableViewCell
+{
     @IBOutlet var lblCompanyName: UILabel!
     @IBOutlet var lblMoneyInvested: UILabel!
     @IBOutlet var lblPercent: UILabel!
