@@ -18,6 +18,11 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        SJSwiftSideMenuController.enableDimBackground = true
+        SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
+
+        
         self.tblFinance.estimatedRowHeight = 200.0
         self.tblFinance.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
@@ -58,7 +63,10 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
     }
     
     @IBAction func btnMenuClicked(sender: UIButton){
-        _ = self.navigationController?.popViewController(animated: true)
+//        _ = self.navigationController?.popViewController(animated: true)
+
+        SJSwiftSideMenuController.showLeftMenu()
+
     }
     
     func downClicked(sender: UIButton) {

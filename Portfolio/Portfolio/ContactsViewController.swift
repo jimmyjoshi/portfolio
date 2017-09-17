@@ -16,6 +16,9 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        SJSwiftSideMenuController.enableDimBackground = true
+        SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +46,9 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
     
     //MARK:- Button Click Action
     @IBAction func btnMenuClicked(sender: UIButton) {
-        _ = self.navigationController?.popViewController(animated: true)
+//        _ = self.navigationController?.popViewController(animated: true)
+        SJSwiftSideMenuController.showLeftMenu()
+
     }
     
     @IBAction func btnSettingsClicked(sender: UIButton) {

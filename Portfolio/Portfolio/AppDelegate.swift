@@ -24,20 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.isStatusBarHidden = true
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let months = DateFormatter().monthSymbols
-        let days = DateFormatter().weekdaySymbols
         
         let sideVC_L : SideMenuController = (storyBoard.instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuController)!
-        sideVC_L.menuItems = months as NSArray!
-        
         let sideVC_R : SideMenuController = (storyBoard.instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuController)!
-        sideVC_R.menuItems = days as NSArray!
         
         let rootVC = storyBoard.instantiateViewController(withIdentifier: "ViewController") as UIViewController
         
         SJSwiftSideMenuController.setUpNavigation(rootController: rootVC, leftMenuController: sideVC_L, rightMenuController: sideVC_R, leftMenuType: .SlideView, rightMenuType: .SlideView)
-
-
 
         return true
     }

@@ -13,10 +13,11 @@ class ViewController: UIViewController
     override func viewDidLoad()
     {
         self.navigationController?.navigationBar.isHidden = true
-        
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         SJSwiftSideMenuController.hideLeftMenu()
+        SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .NONE)
         SJSwiftSideMenuController.enableDimBackground = true
     }
     override var prefersStatusBarHidden : Bool

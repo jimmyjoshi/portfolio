@@ -15,6 +15,10 @@ class EntitiesViewController: UIViewController,UITableViewDelegate,UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Do any additional setup after loading the view, typically from a nib.
+        SJSwiftSideMenuController.enableDimBackground = true
+        SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
+
         // Do any additional setup after loading the view.
     }
 
@@ -49,9 +53,12 @@ class EntitiesViewController: UIViewController,UITableViewDelegate,UITableViewDa
         tblEntity.reloadData()
     }
     
+    
     //MARK:- Button Click Action
     @IBAction func btnMenuClicked(sender: UIButton) {
-         _ = self.navigationController?.popViewController(animated: true)
+//         _ = self.navigationController?.popViewController(animated: true)
+        SJSwiftSideMenuController.showLeftMenu()
+
     }
     
     @IBAction func btnSettingsClicked(sender: UIButton) {

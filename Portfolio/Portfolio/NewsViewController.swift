@@ -17,7 +17,9 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
+        SJSwiftSideMenuController.enableDimBackground = true
+        SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
+
     }
     
     
@@ -48,7 +50,9 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     //MARK:- Button Click Action
     @IBAction func btnMenuClicked(sender: UIButton) {
-        _ = self.navigationController?.popViewController(animated: true)
+//        _ = self.navigationController?.popViewController(animated: true)
+        SJSwiftSideMenuController.showLeftMenu()
+
     }
     
     @IBAction func btnSettingsClicked(sender: UIButton) {

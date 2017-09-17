@@ -16,6 +16,9 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        SJSwiftSideMenuController.enableDimBackground = true
+        SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +50,9 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     //MARK:- Button Click Action
     @IBAction func btnMenuClicked(sender: UIButton) {
-        _ = self.navigationController?.popViewController(animated: true)
+//        _ = self.navigationController?.popViewController(animated: true)
+        SJSwiftSideMenuController.showLeftMenu()
+
     }
     
     @IBAction func btnSettingsClicked(sender: UIButton) {
