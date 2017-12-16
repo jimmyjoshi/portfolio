@@ -19,7 +19,6 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
         // Do any additional setup after loading the view.
         SJSwiftSideMenuController.enableDimBackground = true
         SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
-
     }
     
     

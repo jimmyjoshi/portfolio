@@ -16,6 +16,9 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        SJSwiftSideMenuController.enableDimBackground = true
+        SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
+
         setTemporaryData()
         // Do any additional setup after loading the view.
     }
@@ -34,7 +37,11 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
         colNews.reloadData()
         
     }
-    
+    @IBAction func btnMenuClicked(sender: UIButton) {
+        //         _ = self.navigationController?.popViewController(animated: true)
+        SJSwiftSideMenuController.showLeftMenu()
+        
+    }
     
     @IBAction func btnEntitiesClicked(sender: UIButton)
     {

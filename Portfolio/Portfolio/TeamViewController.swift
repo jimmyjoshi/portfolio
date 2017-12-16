@@ -96,63 +96,6 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.lblDescription.text = "\(description)"
         }
         
-        if let star = dictEntity.value(forKey: kTeamStarKey) {
-            var intStar : Int = star as! Int
-            
-            cell.imgStar1.image = UIImage(named: (1 <= intStar) ? "StarSelected" : "StarUnSelected")
-            cell.imgStar2.image = UIImage(named: (2 <= intStar) ? "StarSelected" : "StarUnSelected")
-            cell.imgStar3.image = UIImage(named: (3 <= intStar) ? "StarSelected" : "StarUnSelected")
-            cell.imgStar4.image = UIImage(named: (4 <= intStar) ? "StarSelected" : "StarUnSelected")
-            cell.imgStar5.image = UIImage(named: (5 <= intStar) ? "StarSelected" : "StarUnSelected")
-            
-            
-            /*
-            
-            if intStar == 0 {
-                cell.imgStar1.image = UIImage(named: "StarUnSelected")
-                cell.imgStar2.image = UIImage(named: "StarUnSelected")
-                cell.imgStar3.image = UIImage(named: "StarUnSelected")
-                cell.imgStar4.image = UIImage(named: "StarUnSelected")
-                cell.imgStar5.image = UIImage(named: "StarUnSelected")
-                
-            }
-            else if intStar == 1 {
-                cell.imgStar1.image = UIImage(named: "StarSelected")
-                cell.imgStar2.image = UIImage(named: "StarUnSelected")
-                cell.imgStar3.image = UIImage(named: "StarUnSelected")
-                cell.imgStar4.image = UIImage(named: "StarUnSelected")
-                cell.imgStar5.image = UIImage(named: "StarUnSelected")
-            }
-            else if intStar == 2 {
-                cell.imgStar1.image = UIImage(named: "StarSelected")
-                cell.imgStar2.image = UIImage(named: "StarSelected")
-                cell.imgStar3.image = UIImage(named: "StarUnSelected")
-                cell.imgStar4.image = UIImage(named: "StarUnSelected")
-                cell.imgStar5.image = UIImage(named: "StarUnSelected")
-            }
-            else if intStar == 3 {
-                cell.imgStar1.image = UIImage(named: "StarSelected")
-                cell.imgStar2.image = UIImage(named: "StarSelected")
-                cell.imgStar3.image = UIImage(named: "StarSelected")
-                cell.imgStar4.image = UIImage(named: "StarUnSelected")
-                cell.imgStar5.image = UIImage(named: "StarUnSelected")
-            }
-            else if intStar == 4 {
-                cell.imgStar1.image = UIImage(named: "StarSelected")
-                cell.imgStar2.image = UIImage(named: "StarSelected")
-                cell.imgStar3.image = UIImage(named: "StarSelected")
-                cell.imgStar4.image = UIImage(named: "StarSelected")
-                cell.imgStar5.image = UIImage(named: "StarUnSelected")
-            }
-            else if intStar == 5 {
-                cell.imgStar1.image = UIImage(named: "StarSelected")
-                cell.imgStar2.image = UIImage(named: "StarSelected")
-                cell.imgStar3.image = UIImage(named: "StarSelected")
-                cell.imgStar4.image = UIImage(named: "StarSelected")
-                cell.imgStar5.image = UIImage(named: "StarUnSelected")
-            }*/
-            
-        }
         return cell
     }
 }
@@ -162,11 +105,6 @@ class teamCell : UITableViewCell {
     @IBOutlet weak var imgPic: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
-    @IBOutlet weak var imgStar1: UIImageView!
-    @IBOutlet weak var imgStar2: UIImageView!
-    @IBOutlet weak var imgStar3: UIImageView!
-    @IBOutlet weak var imgStar4: UIImageView!
-    @IBOutlet weak var imgStar5: UIImageView!
 }
 
 

@@ -109,6 +109,9 @@ class SideMenuController: UIViewController, UITableViewDelegate, UITableViewData
         switch indexPath.row
         {
             case 0:
+                let storyTab = UIStoryboard(name: "Main", bundle: nil)
+                let objFin : DashboardVC = storyTab.instantiateViewController(withIdentifier: "DashboardVC") as! DashboardVC
+                SJSwiftSideMenuController.pushViewController(objFin, animated: true)
                 break
             case 1:
                 let storyTab = UIStoryboard(name: "Main", bundle: nil)
