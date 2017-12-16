@@ -68,6 +68,7 @@ let kLogin = "login"
 let kgetContacts = "get-contacts"
 let kgetAllEntities = "get-all-entities"
 let kgetTeamMembers = "get-team-members"
+let kdocumentCategories = "document-categories"
 
 let kUserprofile = "user-profile-with-interest/"
 
@@ -109,8 +110,7 @@ var kNewsDateKey = "Date"
 var kNewsCollCellIdentifier = "collNews"
 
 //MARK:- Entity Screen Constants
-var kTitleKey = "Title"
-var kDescriptionKey = "Description"
+var kDescriptionKey = "description"
 var kEntityCellIdentifier = "entityCell1"
 
 //MARK:- Entity Detail Screen Constants
@@ -130,8 +130,11 @@ var kDateKey = "Date"
 var kContactsCellIdentifier = "contactCell"
 var kNameKey = "Name"
 var kPostKey = "Post"
-var kImageKey = "Image"
-var kCompanyNameKey = "CompanyName"
+var kImageKey = "image"
+var kCompanyNameKey = "company"
+
+let ktitlekey = "title"
+let kdesignationkey = "designation"
 
 
 //MARK:- Document Screen Constants

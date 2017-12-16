@@ -33,17 +33,17 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
         // Dispose of any resources that can be recreated.
     }
     //MARK:- Tableview Delegate methods
-    
-    func setTemporaryData() {
+    func setTemporaryData()
+    {
         arrNews = NSMutableArray()
-        arrNews.add([kTitleKey: "Vivamus porta ipsum et fermentum",kDescriptionKey: "C'est une nouvelle description qui a été entrée à chek",kDateKey: "25/02/2017"])
-        arrNews.add([kTitleKey: "Maecansn pellentesque fringilla erat",kDescriptionKey: "Bonjour, passez une journée merveilleuse à venir",kDateKey: "25/11/2017"])
-        arrNews.add([kTitleKey: "Vivamus at loren ut insiki dictum",kDescriptionKey: "lorem ipsum est un texte de remplissage ou un greeking couramment utilisé pour démontrer les éléments textuels d'un document graphique ou d'une présentation visuelle.",kDateKey: "25/11/2017"])
-        arrNews.add([kTitleKey: "Donec sed lulla loretta, mollis metus",kDescriptionKey: "Une variation du texte ordinaire de lorem ipsum a été utilisée dans la composition depuis les années 1960 ou plus tôt, alors qu'elle était popularisée par des publicités pour les feuilles de transfert Letraset.",kDateKey: "25/11/2017"])
-        arrNews.add([kTitleKey: "Fund05",kDescriptionKey: "This is new description that has been written",kDateKey: "25/11/2017"])
-        arrNews.add([kTitleKey: "Fund06",kDescriptionKey: "This is new description that has been written",kDateKey: "25/11/2017"])
-        arrNews.add([kTitleKey: "Fund07",kDescriptionKey: "lorem ipsum is a filler text or greeking commonly used to demonstrate the textual elements of a graphic document or visual presentation.",kDateKey: "25/11/2017"])
-        arrNews.add([kTitleKey: "Fund08",kDescriptionKey: "This is new description that has been written in order to check whether it if functionging or not",kDateKey: "25/11/2017"])
+        arrNews.add([ktitlekey: "Vivamus porta ipsum et fermentum",kDescriptionKey: "C'est une nouvelle description qui a été entrée à chek",kDateKey: "25/02/2017"])
+        arrNews.add([ktitlekey: "Maecansn pellentesque fringilla erat",kDescriptionKey: "Bonjour, passez une journée merveilleuse à venir",kDateKey: "25/11/2017"])
+        arrNews.add([ktitlekey: "Vivamus at loren ut insiki dictum",kDescriptionKey: "lorem ipsum est un texte de remplissage ou un greeking couramment utilisé pour démontrer les éléments textuels d'un document graphique ou d'une présentation visuelle.",kDateKey: "25/11/2017"])
+        arrNews.add([ktitlekey: "Donec sed lulla loretta, mollis metus",kDescriptionKey: "Une variation du texte ordinaire de lorem ipsum a été utilisée dans la composition depuis les années 1960 ou plus tôt, alors qu'elle était popularisée par des publicités pour les feuilles de transfert Letraset.",kDateKey: "25/11/2017"])
+        arrNews.add([ktitlekey: "Fund05",kDescriptionKey: "This is new description that has been written",kDateKey: "25/11/2017"])
+        arrNews.add([ktitlekey: "Fund06",kDescriptionKey: "This is new description that has been written",kDateKey: "25/11/2017"])
+        arrNews.add([ktitlekey: "Fund07",kDescriptionKey: "lorem ipsum is a filler text or greeking commonly used to demonstrate the textual elements of a graphic document or visual presentation.",kDateKey: "25/11/2017"])
+        arrNews.add([ktitlekey: "Fund08",kDescriptionKey: "This is new description that has been written in order to check whether it if functionging or not",kDateKey: "25/11/2017"])
         tblNews.reloadData()
     }
     
@@ -85,7 +85,7 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let dictEntity : NSDictionary = arrNews[indexPath.row] as! NSDictionary
         
         
-        if let title = dictEntity.value(forKey: kTitleKey) {
+        if let title = dictEntity.value(forKey: ktitlekey) {
             cell.lblTitle.text = "\(title)"
             cell.lblTitle.sizeToFit()
         }

@@ -18,7 +18,8 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Do any additional setup after loading the view.
         SJSwiftSideMenuController.enableDimBackground = true
         SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
-
+        
+        self.getAllTeamMembers()
     }
     
     func getAllTeamMembers()
@@ -53,15 +54,22 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         {
                             let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
                             App_showAlert(withMessage: msg as! String, inView: self)
+                            self.arrTeam = NSMutableArray()
+                            self.tblTeam.reloadData()
+
                         }
                         else
                         {
+                            self.arrTeam = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                            self.tblTeam.reloadData()
                         }
                     }
                 }
                 break
             case .failure(_):
                 print(response.result.error!)
+                self.arrTeam = NSMutableArray()
+                self.tblTeam.reloadData()
                 App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
                 break
             }
@@ -72,7 +80,6 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         super.viewWillAppear(false)
         self.tblTeam.estimatedRowHeight = 100.0
         self.tblTeam.rowHeight = UITableViewAutomaticDimension
-        setTemporaryData()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -81,15 +88,12 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     //MARK:- Tableview Delegate methods
     
     func setTemporaryData() {
-        arrTeam = NSMutableArray()
         arrTeam.add([kTeamNameKey: "Accell",kTeamDescriptionKey: "Lorel ipsum sit amet conceptures",kTeamImageKey: "",kTeamStarKey: 5])
         arrTeam.add([kTeamNameKey: "Fund02",kTeamDescriptionKey: "Suspendisse cursus felis ut enim ",kTeamImageKey: "",kTeamStarKey: 4])
         arrTeam.add([kTeamNameKey: "Blume Ventures",kTeamDescriptionKey: "Maecenus sit amet elit nec turpis",kTeamImageKey: "",kTeamStarKey: 3])
         arrTeam.add([kTeamNameKey: "IDG Ventures",kTeamDescriptionKey: "Pelletensque lectus dui, suscipt",kTeamImageKey: "",kTeamStarKey: 2])
         arrTeam.add([kTeamNameKey: "Naspers",kTeamDescriptionKey: "Qui at digisom",kTeamImageKey: "",kTeamStarKey: 1])
         arrTeam.add([kTeamNameKey: "SteadView Capital",kTeamDescriptionKey: "Mascellea vitro chimpa",kTeamImageKey: "",kTeamStarKey: 0])
-        
-        tblTeam.reloadData()
     }
     
     //MARK:- Button Click Action
@@ -130,15 +134,21 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let cell : teamCell = tableView.dequeueReusableCell(withIdentifier: kTeamCellIdentifier, for: indexPath) as! teamCell
         let dictEntity : NSDictionary = arrTeam[indexPath.row] as! NSDictionary
         
-        if let img = dictEntity.value(forKey: kTeamImageKey) {
-            //cell.lb.text = "\(title)"
+        if let strimageLink = dictEntity.value(forKey: kImageKey)
+        {
+            let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
+            let url2 = URL(string: strURL)
+            if url2 != nil {
+                cell.imgPic.sd_setImage(with: url2, placeholderImage: nil)
+            }
         }
         
-        if let name = dictEntity.value(forKey: kTeamNameKey) {
+        if let name = dictEntity.value(forKey: kCompanyNamKey)
+        {
             cell.lblName.text = "\(name)"
         }
         
-        if let description = dictEntity.value(forKey: kTeamDescriptionKey)
+        if let description = dictEntity.value(forKey: kDescriptionKey)
         {
             cell.lblDescription.text = "\(description)"
         }

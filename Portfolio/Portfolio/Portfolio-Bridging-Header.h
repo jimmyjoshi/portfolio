@@ -6,8 +6,5 @@
 //  Copyright © 2017 Niyati. All rights reserved.
 //
 
-#ifndef Portfolio_Bridging_Header_h
-#define Portfolio_Bridging_Header_h
 
-
-#endif /* Portfolio_Bridging_Header_h */
+#import "UIImageView+WebCache.h"

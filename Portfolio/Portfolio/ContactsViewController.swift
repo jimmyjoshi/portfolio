@@ -13,8 +13,10 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
     @IBOutlet var txtSearch: UITextField!
     
     var arrContacts = NSMutableArray()
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
         SJSwiftSideMenuController.enableDimBackground = true
         SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
@@ -53,15 +55,22 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
                         {
                             let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
                             App_showAlert(withMessage: msg as! String, inView: self)
+                            self.arrContacts = NSMutableArray()
+                            self.tblNews.reloadData()
+
                         }
                         else
                         {
+                            self.arrContacts = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                            self.tblNews.reloadData()
                         }
                     }
                 }
                 break
             case .failure(_):
                 print(response.result.error!)
+                self.arrContacts = NSMutableArray()
+                self.tblNews.reloadData()
                 App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
                 break
             }
@@ -73,16 +82,17 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
         super.viewWillAppear(true)
         self.tblNews.estimatedRowHeight = 200.0
         self.tblNews.rowHeight = UITableViewAutomaticDimension
-        setTemporaryData()
     }
-    override func didReceiveMemoryWarning() {
+    
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     //MARK:- Tableview Delegate methods
     
-    func setTemporaryData() {
-        arrContacts = NSMutableArray()
+    func setTemporaryData()
+    {
         arrContacts.add([kNameKey: "Anna Watson",kPostKey: "Marketing Manager",kCompanyNameKey: "Aviva",kImageKey: "settings"])
             arrContacts.add([kNameKey: "Berry Mark",kPostKey: "General Manager",kCompanyNameKey: "Birla Sun Life",kImageKey: "settings"])
             arrContacts.add([kNameKey: "Benson Danial",kPostKey: "Assistant Manager",kCompanyNameKey: "HDFC Life Insurance",kImageKey: "settings"])
@@ -127,18 +137,27 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : contactCell = tableView.dequeueReusableCell(withIdentifier: kContactsCellIdentifier, for: indexPath) as! contactCell
         let dictEntity : NSDictionary = arrContacts[indexPath.row] as! NSDictionary
-        if let name = dictEntity.value(forKey: kNameKey) {
+        
+        if let name = dictEntity.value(forKey: ktitlekey)
+        {
             cell.lblName.text = "\(name)"
         }
-        if let post = dictEntity.value(forKey: kPostKey) {
+        if let post = dictEntity.value(forKey: kdesignationkey)
+        {
             cell.lblPost.text = "\(post)"
         }
-        if let company = dictEntity.value(forKey: kCompanyNameKey) {
+        if let company = dictEntity.value(forKey: kCompanyNameKey)
+        {
             cell.lblCompanyName.text = "\(company)"
         }
         
-        if let image = dictEntity.value(forKey: kImageKey) {
-            //cell.imgPic.image
+        if let strimageLink = dictEntity.value(forKey: kImageKey)
+        {
+            let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20") 
+            let url2 = URL(string: strURL)
+            if url2 != nil {
+                cell.imgPic.sd_setImage(with: url2, placeholderImage: nil)
+            }
         }
         return cell
     }
