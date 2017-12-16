@@ -61,43 +61,17 @@ let kYES = "YES"
 let kFBAPPID = "128398547683260"
 
 
-//let kServerURL = "http://52.66.73.127/bonfire/bon-lara/public/api/"
-// https://bonfireapp.xyz/
-let kServerURL = "https://bonfireapp.xyz/api/"
+let kServerURL = "http://52.66.73.127/port-folio/public/api/"
 
-let kSignUP = "signup"
+let kforgotpassword = "forgotpassword"
 let kLogin = "login"
+let kgetContacts = "get-contacts"
+let kgetAllEntities = "get-all-entities"
+let kgetTeamMembers = "get-team-members"
+
 let kUserprofile = "user-profile-with-interest/"
-let kCampus = "campus"
-let kCreateGroup = "groups/create"
-let kEditGroup = "groups/edit"
 
-let kInterest  = "interests"
-let kEvents  = "events"
-let kAddInterest = "user-interest/add-interest"
-let kGetAllChannel = "get-channels"
-let kGetChannelByGroupID = "channels/get-channels-by-group-id"
-let kManagePermission = "groups/manage-permission"
 
-let kGetAppGroup = "groups"
-let kGetForYouFeed = "get-for-you-groups"
-let kRandomGroups = "groups/random-groups"
-
-let kCreateNewChannel = "create-new-channel"
-let kCreateNewFeed = "create-new-feed"
-let kAddGrpMember = "add-member"
-let kGetAllChannelFeed = "get-all-channel-feeds"
-let kGetMessagesFeed = "get-home-feeds"
-let kGetGrpEvents = "get-group-events"
-let kGetAllCampusUser = "campus-users"
-let kRemoveGroup = "groups/exit"
-let kUserInterestUpdate = "user-interest/add-bulk-interest"
-let kLeadersofGroup = "groups/get-member-suggestions"
-let kAddMemberAPI = "groups/add-member"
-let kAddEvent = "events/create"
-let kDeleteEvent = "events/delete"
-let kkeySetDeviceToken = "set-user-token"
-let kDeleteChannel = "channels/delete-channel"
 
 let kEditProfileAPI = "user-profile/update-profile"
 

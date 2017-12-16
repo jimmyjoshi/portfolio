@@ -151,6 +151,8 @@ class SideMenuController: UIViewController, UITableViewDelegate, UITableViewData
             case 8:
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 let rootVC = storyBoard.instantiateViewController(withIdentifier: "ViewController") as UIViewController
+                UserDefaults.standard.set(false, forKey: kkeyisUserLogin)
+                UserDefaults.standard.synchronize()
                 SJSwiftSideMenuController.pushViewController(rootVC, animated: true)
                 break
             default:

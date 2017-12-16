@@ -16,6 +16,8 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationController?.navigationBar.isHidden = true
+
         SJSwiftSideMenuController.enableDimBackground = true
         SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
 
