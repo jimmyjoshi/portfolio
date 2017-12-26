@@ -19,7 +19,8 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         SJSwiftSideMenuController.enableDimBackground = true
         SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
         
-        self.getAllTeamMembers()
+        self.setTemporaryData()
+        //self.getAllTeamMembers()
     }
     
     func getAllTeamMembers()
@@ -94,6 +95,8 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         arrTeam.add([kTeamNameKey: "IDG Ventures",kTeamDescriptionKey: "Pelletensque lectus dui, suscipt",kTeamImageKey: "",kTeamStarKey: 2])
         arrTeam.add([kTeamNameKey: "Naspers",kTeamDescriptionKey: "Qui at digisom",kTeamImageKey: "",kTeamStarKey: 1])
         arrTeam.add([kTeamNameKey: "SteadView Capital",kTeamDescriptionKey: "Mascellea vitro chimpa",kTeamImageKey: "",kTeamStarKey: 0])
+        self.tblTeam.reloadData()
+
     }
     
     //MARK:- Button Click Action

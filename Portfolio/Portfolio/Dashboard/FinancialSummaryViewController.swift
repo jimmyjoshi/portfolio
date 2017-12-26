@@ -28,6 +28,58 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
         // Do any additional setup after loading the view.
         setTemporaryData()
     }
+    func getFinancialSummary()
+    {
+        let dic = UserDefaults.standard.value(forKey: kkeyLoginData)
+        let final  = NSKeyedUnarchiver .unarchiveObject(with: dic as! Data) as! NSDictionary
+        
+        let url = kServerURL + kGetFinancialSummary
+        showProgress(inView: self.view)
+        
+        let token = final .value(forKey: "userToken")
+        let headers = ["Authorization":"Bearer \(token!)"]
+        let parameters: [String: Any] = ["keyword": ""]
+        
+        request(url, method: .post, parameters:parameters, headers: headers).responseJSON { (response:DataResponse<Any>) in
+            
+            print(response.result.debugDescription)
+            hideProgress()
+            
+            switch(response.result)
+            {
+            case .success(_):
+                if response.result.value != nil
+                {
+                    print(response.result.value!)
+                    
+                    if let json = response.result.value
+                    {
+                        let dictemp = json as! NSDictionary
+                        print("dictemp :> \(dictemp)")
+                        
+                        if (dictemp.value(forKey: "error") != nil)
+                        {
+                            self.arrFinancialData = NSMutableArray()
+                            
+                            let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
+                            App_showAlert(withMessage: msg as! String, inView: self)
+                        }
+                        else
+                        {
+                            self.arrFinancialData = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                        }
+                    }
+                }
+                break
+            case .failure(_):
+                print(response.result.error!)
+                self.arrFinancialData = NSMutableArray()
+                App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
+                break
+            }
+        }
+    }
+
 
     func setTemporaryData() {
         

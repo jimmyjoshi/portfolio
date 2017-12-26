@@ -137,7 +137,7 @@ class DocumentsViewController: UIViewController,UITableViewDelegate,UITableViewD
             cell.lblTitle.text = "\(title)"
         }
         
-        if let strimageLink = dictEntity.value(forKey: kImageKey)
+        if let strimageLink = dictEntity.value(forKey: kIconKey)
         {
             let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
             let url2 = URL(string: strURL)

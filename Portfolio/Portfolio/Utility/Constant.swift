@@ -69,9 +69,12 @@ let kgetContacts = "get-contacts"
 let kgetAllEntities = "get-all-entities"
 let kgetTeamMembers = "get-team-members"
 let kdocumentCategories = "document-categories"
+let kGetNews = "get-news"
+let kGetFinancialSummary = "get-financial-summary"
+let kGetUserCompanies = "get-all-user-companies"
+
 
 let kUserprofile = "user-profile-with-interest/"
-
 
 
 let kEditProfileAPI = "user-profile/update-profile"
@@ -132,6 +135,7 @@ var kNameKey = "Name"
 var kPostKey = "Post"
 var kImageKey = "image"
 var kCompanyNameKey = "company"
+var kIconKey = "icon"
 
 let ktitlekey = "title"
 let kdesignationkey = "designation"

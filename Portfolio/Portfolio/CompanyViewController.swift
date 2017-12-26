@@ -21,10 +21,65 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    func getUserCompanies()
+    {
+        let dic = UserDefaults.standard.value(forKey: kkeyLoginData)
+        let final  = NSKeyedUnarchiver .unarchiveObject(with: dic as! Data) as! NSDictionary
+        
+        let url = kServerURL + kGetUserCompanies
+        showProgress(inView: self.view)
+        
+        let token = final .value(forKey: "userToken")
+        let headers = ["Authorization":"Bearer \(token!)"]
+        let parameters: [String: Any] = ["keyword": ""]
+        
+        request(url, method: .post, parameters:parameters, headers: headers).responseJSON { (response:DataResponse<Any>) in
+            
+            print(response.result.debugDescription)
+            hideProgress()
+            
+            switch(response.result)
+            {
+            case .success(_):
+                if response.result.value != nil
+                {
+                    print(response.result.value!)
+                    
+                    if let json = response.result.value
+                    {
+                        let dictemp = json as! NSDictionary
+                        print("dictemp :> \(dictemp)")
+                        
+                        if (dictemp.value(forKey: "error") != nil)
+                        {
+                            self.arrCompany = NSMutableArray()
+                            
+                            let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
+                            App_showAlert(withMessage: msg as! String, inView: self)
+                        }
+                        else
+                        {
+                            self.arrCompany = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                        }
+                    }
+                }
+                break
+            case .failure(_):
+                print(response.result.error!)
+                self.arrCompany = NSMutableArray()
+                App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
+                break
+            }
+        }
+    }
+
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(true)
         setTemporaryData()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
