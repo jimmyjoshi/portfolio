@@ -108,9 +108,9 @@ extension Date {
     }
 }
 //MARK:- Dashboard Constants
-var kNewsTitleKey = "Title"
-var kNewsDescriptionKey = "Description"
-var kNewsDateKey = "Date"
+var kNewsTitleKey = "title"
+var kNewsDescriptionKey = "description"
+var kNewsDateKey = "publicDate"
 
 var kNewsCollCellIdentifier = "collNews"
 

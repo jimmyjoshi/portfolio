@@ -19,6 +19,8 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
         // Do any additional setup after loading the view.
         SJSwiftSideMenuController.enableDimBackground = true
         SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
+        
+        self.getNews()
     }
     
     func getNews()
@@ -62,11 +64,13 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
                             self.arrNews = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
                         }
                     }
+                    self.tblNews.reloadData()
                 }
                 break
             case .failure(_):
                 print(response.result.error!)
                 self.arrNews = NSMutableArray()
+                self.tblNews.reloadData()
                 App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
                 break
             }
@@ -79,7 +83,7 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
         super.viewWillAppear(true)
         self.tblNews.estimatedRowHeight = 200.0
         self.tblNews.rowHeight = UITableViewAutomaticDimension
-        setTemporaryData()
+//        setTemporaryData()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -129,24 +133,31 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let dictEntity : NSDictionary = arrNews[indexPath.row] as! NSDictionary
         tableView.deselectRow(at: indexPath, animated: true)
+
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objFin : OpenEcternalLinkVC = storyTab.instantiateViewController(withIdentifier: "OpenEcternalLinkVC") as! OpenEcternalLinkVC
+        objFin.strURL = "\(dictEntity.value(forKey: "link")!)"
+        self.navigationController?.pushViewController(objFin, animated: true)
+
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell : newsCell = tableView.dequeueReusableCell(withIdentifier: kNewsCellIdentifier, for: indexPath) as! newsCell
         let dictEntity : NSDictionary = arrNews[indexPath.row] as! NSDictionary
         
-        
-        if let title = dictEntity.value(forKey: ktitlekey) {
+        if let title = dictEntity.value(forKey: kNewsTitleKey) {
             cell.lblTitle.text = "\(title)"
             cell.lblTitle.sizeToFit()
         }
-        if let description = dictEntity.value(forKey: kDescriptionKey) {
+        if let description = dictEntity.value(forKey: kNewsDescriptionKey) {
             cell.lblDescription.text = "\(description)"
             cell.lblDescription.sizeToFit()
         }
-        if let date = dictEntity.value(forKey: kDateKey) {
+        if let date = dictEntity.value(forKey: kNewsDateKey) {
             cell.lblDate.text = "\(date)"
         }
         return cell

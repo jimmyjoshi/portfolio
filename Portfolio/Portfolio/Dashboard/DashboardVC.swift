@@ -22,7 +22,7 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
         SJSwiftSideMenuController.enableDimBackground = true
         SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
 
-        setTemporaryData()
+//        setTemporaryData()
         // Do any additional setup after loading the view.
         self.getNews()
     }
@@ -65,13 +65,22 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
                         if (dictemp.value(forKey: "error") != nil)
                         {
                             self.arrNews = NSMutableArray()
-                            
                             let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
                             App_showAlert(withMessage: msg as! String, inView: self)
                         }
                         else
                         {
                             self.arrNews = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                            self.pgControl.currentPage = 0
+                            if self.arrNews.count > 5
+                            {
+                                self.pgControl.numberOfPages = 5
+                            }
+                            else
+                            {
+                                self.pgControl.numberOfPages = self.arrNews.count
+                            }
+                            self.colNews.reloadData()
                         }
                     }
                 }
@@ -145,12 +154,20 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
     
     //MARK:- Collection View delegate methods
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrNews.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        if self.arrNews.count > 5
+        {
+            return 5
+        }
+        else
+        {
+            return arrNews.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cellNews = collectionView.dequeueReusableCell(withReuseIdentifier: kNewsCollCellIdentifier, for: indexPath) as! newsCollCell
+        let cellNews = collectionView.dequeueReusableCell(withReuseIdentifier: kNewsCollCellIdentifier, for: indexPath) as! newsCollCell
         
         let dict : NSDictionary = arrNews[indexPath.row] as! NSDictionary
         
@@ -163,12 +180,24 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
         if let date = dict.value(forKey: kNewsDateKey) {
             cellNews.lblDate.text = "\(date)"
         }
+        cellNews.layoutIfNeeded()
         return cellNews
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: MainScreen.width - 64, height: 92)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        return CGSize(width: MainScreen.width - 65, height: 92)
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Calculate the new page index depending on the content offset.

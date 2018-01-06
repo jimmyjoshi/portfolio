@@ -14,6 +14,7 @@
 		D3307B541F55D3B9007736A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3307B521F55D3B9007736A4 /* LaunchScreen.storyboard */; };
 		D3307B5D1F55D5DB007736A4 /* SJSwiftSideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3307B5C1F55D5DB007736A4 /* SJSwiftSideMenuController.swift */; };
 		D3307B5F1F55D67E007736A4 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3307B5E1F55D67E007736A4 /* SideMenuController.swift */; };
+		D3446FD620013A0D0093267C /* OpenEcternalLinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3446FD520013A0D0093267C /* OpenEcternalLinkVC.swift */; };
 		D3C9EAF21FE55C3400D5EEF7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C9EAF11FE55C3400D5EEF7 /* QuartzCore.framework */; };
 		D3C9EB1B1FE55C8A00D5EEF7 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C9EAF51FE55C8A00D5EEF7 /* MKAnnotationView+WebCache.m */; };
 		D3C9EB1C1FE55C8A00D5EEF7 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C9EAF71FE55C8A00D5EEF7 /* NSData+ImageContentType.m */; };
@@ -98,6 +99,7 @@
 		D3307B551F55D3B9007736A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3307B5C1F55D5DB007736A4 /* SJSwiftSideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJSwiftSideMenuController.swift; sourceTree = "<group>"; };
 		D3307B5E1F55D67E007736A4 /* SideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
+		D3446FD520013A0D0093267C /* OpenEcternalLinkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenEcternalLinkVC.swift; sourceTree = "<group>"; };
 		D3C9EAF11FE55C3400D5EEF7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D3C9EAF41FE55C8A00D5EEF7 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		D3C9EAF51FE55C8A00D5EEF7 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				D5B799FC1F5C596800BB1A9E /* CompanyViewController.swift */,
 				D57B9D311F62FB9100BE44FB /* TeamDetailViewController.swift */,
 				D57B9D331F6315EB00BE44FB /* EntityDetailViewController.swift */,
+				D3446FD520013A0D0093267C /* OpenEcternalLinkVC.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				D3307B5D1F55D5DB007736A4 /* SJSwiftSideMenuController.swift in Sources */,
 				D3EDF2081F55D8F800D5D82D /* Validation.swift in Sources */,
 				D3C9EB271FE55C8A00D5EEF7 /* UIImage+GIF.m in Sources */,
+				D3446FD620013A0D0093267C /* OpenEcternalLinkVC.swift in Sources */,
 				D3EDF2021F55D8F800D5D82D /* Result.swift in Sources */,
 				D3EDF1EA1F55D8F800D5D82D /* IQUIViewController+Additions.swift in Sources */,
 				D3C9EB251FE55C8A00D5EEF7 /* SDWebImagePrefetcher.m in Sources */,
