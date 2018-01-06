@@ -61,7 +61,9 @@ let kYES = "YES"
 let kFBAPPID = "128398547683260"
 
 
-let kServerURL = "http://52.66.73.127/port-folio/public/api/"
+//let kServerURL = "http://52.66.73.127/port-folio/public/api/"
+let kServerURL = "http://52.23.203.124/port-folio/public/api/"
+
 
 let kforgotpassword = "forgotpassword"
 let kLogin = "login"
@@ -175,5 +177,7 @@ var kFinancialDetailIdentifier = "financialDetailCell"
 var kFinancialCompanyAmountKey = "Amount"
 var kFinancialCashMainCellIdentifier = "cashMainCell"
 var kFinancialCashDetailCellIdentifier = "cashDetailCell"
-
+let kcompanyCategoryTitle = "companyCategoryTitle"
+let kamount = "amount"
+let kkeynotes = "notes"
 

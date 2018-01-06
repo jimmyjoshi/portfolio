@@ -3,7 +3,7 @@
 //  Portfolio
 //
 //  Created by Ravi Panicker on 02/09/17.
-//  Copyright © 2017 Niyati. All rights reserved.
+//  Copyright © 2017 Kevin. All rights reserved.
 //
 
 import UIKit
@@ -12,15 +12,19 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet var tblTeam: UITableView!
     @IBOutlet var txtSearch: UITextField!
     var arrTeam = NSMutableArray()
-    override func viewDidLoad() {
+    var arrOutSideTeam = NSMutableArray()
+    
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         SJSwiftSideMenuController.enableDimBackground = true
         SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
         
-        self.setTemporaryData()
-        //self.getAllTeamMembers()
+//        self.setTemporaryData()
+        self.getAllTeamMembers()
     }
     
     func getAllTeamMembers()
@@ -61,7 +65,19 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         }
                         else
                         {
-                            self.arrTeam = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                            if let dictTeams = dictemp.value(forKey: "data") as? NSDictionary
+                            {
+                                if let arrInsideTeam = dictTeams.value(forKey: "insideTeam") as? NSArray
+                                {
+                                    self.arrTeam = NSMutableArray(array: arrInsideTeam)
+                                }
+                                
+                                if let arrOutsideTeam = dictTeams.value(forKey: "outsideTeam") as? NSArray
+                                {
+                                    self.arrTeam = NSMutableArray(array: arrOutsideTeam)
+                                }
+                            }
+
                             self.tblTeam.reloadData()
                         }
                     }
@@ -116,44 +132,119 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     //MARK:- Table View Delegate Methods
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
+        if arrTeam.count > 0 && arrOutSideTeam.count > 0
+        {
+            return 2
+        }
+        else
+        {
+            return 1
+        }
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrTeam.count
+   
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 40))
+        headerView.backgroundColor = UIColor.clear
+        
+        let imgbg = UIImageView(frame: CGRect(x: 10, y: 0, width: MainScreen.width-20, height: 40))
+        imgbg.backgroundColor = UIColor.white
+        imgbg.clipsToBounds = true
+        imgbg.layer.cornerRadius = 5.0
+        
+        let lblText = UILabel(frame: CGRect(x: 25, y: 5, width: MainScreen.width-25, height: 30))
+        if section == 0
+        {
+            lblText.text =  "Inside Team"
+        }
+        else
+        {
+            lblText.text = "Outside Team"
+        }
+        headerView.addSubview(imgbg)
+        headerView.addSubview(lblText)
+        return headerView
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        return 40
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        if section == 0
+        {
+            return arrTeam.count
+        }
+        else
+        {
+            return arrOutSideTeam.count
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
         return 94
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
         tableView.deselectRow(at: indexPath, animated: true)
         let storyTab = UIStoryboard(name: "Main", bundle: nil)
         let objTeamDetail  : TeamDetailViewController = storyTab.instantiateViewController(withIdentifier: "TeamDetailViewController") as! TeamDetailViewController
         self.navigationController?.pushViewController(objTeamDetail, animated: true)
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell : teamCell = tableView.dequeueReusableCell(withIdentifier: kTeamCellIdentifier, for: indexPath) as! teamCell
-        let dictEntity : NSDictionary = arrTeam[indexPath.row] as! NSDictionary
         
-        if let strimageLink = dictEntity.value(forKey: kImageKey)
+        if indexPath.section == 0
         {
-            let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
-            let url2 = URL(string: strURL)
-            if url2 != nil {
-                cell.imgPic.sd_setImage(with: url2, placeholderImage: nil)
+            let dictEntity : NSDictionary = arrTeam[indexPath.row] as! NSDictionary
+            
+            if let strimageLink = dictEntity.value(forKey: kImageKey)
+            {
+                let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
+                let url2 = URL(string: strURL)
+                if url2 != nil {
+                    cell.imgPic.sd_setImage(with: url2, placeholderImage: nil)
+                }
+            }
+            
+            if let name = dictEntity.value(forKey: kCompanyNamKey)
+            {
+                cell.lblName.text = "\(name)"
+            }
+            
+            if let description = dictEntity.value(forKey: kDescriptionKey)
+            {
+                cell.lblDescription.text = "\(description)"
             }
         }
-        
-        if let name = dictEntity.value(forKey: kCompanyNamKey)
+        else if indexPath.section == 1
         {
-            cell.lblName.text = "\(name)"
-        }
-        
-        if let description = dictEntity.value(forKey: kDescriptionKey)
-        {
-            cell.lblDescription.text = "\(description)"
+            let dictEntity : NSDictionary = arrOutSideTeam[indexPath.row] as! NSDictionary
+            
+            if let strimageLink = dictEntity.value(forKey: kImageKey)
+            {
+                let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
+                let url2 = URL(string: strURL)
+                if url2 != nil {
+                    cell.imgPic.sd_setImage(with: url2, placeholderImage: nil)
+                }
+            }
+            
+            if let name = dictEntity.value(forKey: kCompanyNamKey)
+            {
+                cell.lblName.text = "\(name)"
+            }
+            
+            if let description = dictEntity.value(forKey: kDescriptionKey)
+            {
+                cell.lblDescription.text = "\(description)"
+            }
+
         }
         
         return cell

@@ -3,7 +3,7 @@
 //  Portfolio
 //
 //  Created by Ravi Panicker on 08/09/17.
-//  Copyright © 2017 Niyati. All rights reserved.
+//  Copyright © 2017 Kevin. All rights reserved.
 //
 
 import UIKit

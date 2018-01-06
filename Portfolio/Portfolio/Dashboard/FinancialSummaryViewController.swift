@@ -3,7 +3,7 @@
 //  Portfolio
 //
 //  Created by Ravi Panicker on 10/09/17.
-//  Copyright © 2017 Niyati. All rights reserved.
+//  Copyright © 2017 Kevin. All rights reserved.
 //
 
 import UIKit
@@ -12,8 +12,12 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
 
     @IBOutlet weak var tblFinance: UITableView!
     var arrFinancialData = NSMutableArray()
-    
-    
+    var arrTaxDocument = NSMutableArray()
+    var arrStatement = NSMutableArray()
+    var arrCash = NSMutableArray()
+    var strTitleofCash = String()
+    var iTotoalCash = NSNumber()
+
     var isMore : Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,8 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
         self.tblFinance.estimatedRowHeight = 200.0
         self.tblFinance.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
-        setTemporaryData()
+//        setTemporaryData()
+        self.getFinancialSummary()
     }
     func getFinancialSummary()
     {
@@ -38,9 +43,8 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
         
         let token = final .value(forKey: "userToken")
         let headers = ["Authorization":"Bearer \(token!)"]
-        let parameters: [String: Any] = ["keyword": ""]
         
-        request(url, method: .post, parameters:parameters, headers: headers).responseJSON { (response:DataResponse<Any>) in
+        request(url, method: .get, parameters:nil, headers: headers).responseJSON { (response:DataResponse<Any>) in
             
             print(response.result.debugDescription)
             hideProgress()
@@ -66,7 +70,28 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
                         }
                         else
                         {
-                            self.arrFinancialData = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                            if let dictdata = dictemp.value(forKey: "data") as? NSDictionary
+                            {
+                                if let dictcashSummary = dictdata.value(forKey: "cashSummary") as? NSDictionary
+                                {
+                                    if let arrcompanies = dictcashSummary.value(forKey: "companies") as? NSArray
+                                    {
+                                        self.arrCash = NSMutableArray(array: arrcompanies)
+                                    }
+                                    
+                                    self.strTitleofCash = dictcashSummary.value(forKey: "label") as! String
+                                    self.iTotoalCash = dictcashSummary.value(forKey: "totalCash") as! NSNumber
+                                    
+                                }
+                                self.arrFinancialData = NSMutableArray()
+                                self.arrStatement = NSMutableArray(array: dictdata.value(forKey: "financialStatment") as! NSArray)
+                                self.arrTaxDocument = NSMutableArray(array: dictdata.value(forKey: "taxDocuments") as! NSArray)
+                                
+                                self.arrFinancialData.add([kHeaderTitleKey: "Cash Summary",kFinancialDetailArrKey: self.arrCash])
+                                self.arrFinancialData.add([kHeaderTitleKey: "Financial Statement",kFinancialDetailArrKey: self.arrStatement])
+                                self.arrFinancialData.add([kHeaderTitleKey: "Tax Document",kFinancialDetailArrKey: self.arrTaxDocument])
+                            }
+                            self.tblFinance.reloadData()
                         }
                     }
                 }
@@ -83,18 +108,16 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
 
     func setTemporaryData() {
         
-        var arrCash = NSMutableArray()
         arrCash.add([kFinancialCompanyNameKey: "Total Cash",kFinancialCompanyAmountKey: "$57,000"])
         arrCash.add([kFinancialCompanyNameKey: "Aviva Insurance",kFinancialCompanyAmountKey: "$25,000"])
         arrCash.add([kFinancialCompanyNameKey: "Shri Ram Group",kFinancialCompanyAmountKey: "$17,000"])
         arrCash.add([kFinancialCompanyNameKey: "Tata Group",kFinancialCompanyAmountKey: "$15,000"])
         
-        var arrStatement = NSMutableArray()
+        
         arrStatement.add([kFinancialCompanyNameKey: "Lorel Ipsum sit ament 2016",kFinancialCompanyDescKey: "C'est une nouvelle description qui a été entrée à chek"])
         arrStatement.add([kFinancialCompanyNameKey: "Suspendize poletin sed",kFinancialCompanyDescKey: "C'est une nouvelle description qui a été entrée à chek"])
         arrStatement.add([kFinancialCompanyNameKey: "Suspendize poletin sed",kFinancialCompanyDescKey: "C'est une nouvelle description qui a été entrée à chek"])
         
-        var arrTaxDocument = NSMutableArray()
         arrTaxDocument.add([kFinancialCompanyNameKey: "Lorel Ipsum sit ament 2016"])
         arrTaxDocument.add([kFinancialCompanyNameKey: "Suspendize poletin sed"])
         
@@ -139,7 +162,7 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
             {
                 if let arr = dict.value(forKey: kFinancialDetailArrKey){
                     let tmpArray = arr as! NSMutableArray
-                    return tmpArray.count
+                    return tmpArray.count + 1
                 }
             }
             else
@@ -178,28 +201,29 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
     }
     
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
         return 55
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         var mainCell = UITableViewCell()
-        if indexPath.section == 0 {
-            if indexPath.row ==  0 {
+        if indexPath.section == 0
+        {
+            if indexPath.row ==  0
+            {
                 let cell : cashMainCell = tableView.dequeueReusableCell(withIdentifier: kFinancialCashMainCellIdentifier, for: indexPath) as! cashMainCell
-                let dictMain : NSDictionary = arrFinancialData[indexPath.section] as! NSDictionary
-                let dicCompany : NSDictionary = (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).object(at: indexPath.row) as! NSDictionary
                 cell.btnShow.addTarget(self, action: #selector (self.downClicked(sender:)), for: .touchUpInside)
-                if let name = dicCompany.value(forKey: kFinancialCompanyNameKey) {
-                    cell.lblTitle.text = "\(name)"
-                }
-                if let amount = dicCompany.value(forKey: kFinancialCompanyAmountKey) {
-                    cell.lblAmount.text = "\(amount)"
-                }
                 
-                if isMore  {
+                cell.lblTitle.text = "\(self.strTitleofCash)"
+                cell.lblAmount.text = "\(self.iTotoalCash)"
+                
+                if isMore
+                {
                     cell.imgBottomLine.isHidden = false
                     cell.imgBottomView.isHidden = false
                 }
@@ -215,21 +239,21 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
             {
                 let cell : cashDetailCell = tableView.dequeueReusableCell(withIdentifier: kFinancialCashDetailCellIdentifier, for: indexPath) as! cashDetailCell
                 let dictMain : NSDictionary = arrFinancialData[indexPath.section] as! NSDictionary
-                let dicCompany : NSDictionary = (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).object(at: indexPath.row) as! NSDictionary
+                let dicCompany : NSDictionary = (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).object(at: indexPath.row-1) as! NSDictionary
                 
-                if let name = dicCompany.value(forKey: kFinancialCompanyNameKey) {
+                if let name = dicCompany.value(forKey: ktitlekey) {
                     cell.lblCompanyName.text = "\(name)"
                 }
-                if let amount = dicCompany.value(forKey: kFinancialCompanyAmountKey) {
+                if let amount = dicCompany.value(forKey: kamount) {
                     cell.lblAmount.text = "\(amount)"
                 }
                 
-                if (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).count == (indexPath.row + 1) {
+                if (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).count == (indexPath.row)
+                {
                     cell.imgTopView.isHidden = false
                     cell.imgBottomView.isHidden = true
                     cell.imgBottomLine.isHidden = true
                     cell.imgTopLine.isHidden = false
-                    
                 }
                 else
                 {
@@ -243,7 +267,8 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
                 mainCell = cell
             }
         }
-        else if indexPath.section == 1 {
+        else if indexPath.section == 1
+        {
             let cell : financialDetailCell = tableView.dequeueReusableCell(withIdentifier: kFinancialDetailIdentifier, for: indexPath) as! financialDetailCell
             let dictMain : NSDictionary = arrFinancialData[indexPath.section] as! NSDictionary
             let dicCompany : NSDictionary = (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).object(at: indexPath.row) as! NSDictionary
@@ -263,16 +288,18 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
                 cell.vwBottom.isHidden = false
             }
             
-            if let name = dicCompany.value(forKey: kFinancialCompanyNameKey) {
+            if let name = dicCompany.value(forKey: ktitlekey) {
                 cell.lblTitle.text = "\(name)"
             }
-            if let desc = dicCompany.value(forKey: kFinancialCompanyDescKey) {
+            if let desc = dicCompany.value(forKey: kkeynotes)
+            {
                 cell.lblDescription.text = "\(desc)"
             }
             
             mainCell = cell
         }
-        else if indexPath.section == 2 {
+        else if indexPath.section == 2
+        {
             let cell : financialDetailCell = tableView.dequeueReusableCell(withIdentifier: kFinancialDetailIdentifier, for: indexPath) as! financialDetailCell
             let dictMain : NSDictionary = arrFinancialData[indexPath.section] as! NSDictionary
             let dicCompany : NSDictionary = (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).object(at: indexPath.row) as! NSDictionary
@@ -290,11 +317,11 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
                 cell.vwBottom.isHidden = false
             }
             
-            if let name = dicCompany.value(forKey: kFinancialCompanyNameKey) {
+            if let name = dicCompany.value(forKey: ktitlekey)
+            {
                 cell.lblTitle.text = "\(name)"
             }
             cell.lblDescription.text = ""
-            
             
             mainCell = cell
         }
