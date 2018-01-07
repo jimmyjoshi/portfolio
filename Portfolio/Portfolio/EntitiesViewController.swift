@@ -133,9 +133,10 @@ class EntitiesViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         let storyTab = UIStoryboard(name: "Main", bundle: nil)
         let objEntityDetail  : EntityDetailViewController = storyTab.instantiateViewController(withIdentifier: "EntityDetailViewController") as! EntityDetailViewController
+        objEntityDetail.dictFundDetails = arrEntityData[indexPath.row] as! NSDictionary
         self.navigationController?.pushViewController(objEntityDetail, animated: true)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -146,7 +147,6 @@ class EntitiesViewController: UIViewController,UITableViewDelegate,UITableViewDa
         {
             cell.lblTitle.text = "\(title)"
         }
-        
         if let description = dictEntity.value(forKey: kDescriptionKey)
         {
             cell.lblDescription.text = "\(description)"

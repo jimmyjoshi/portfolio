@@ -8,17 +8,21 @@
 
 import UIKit
 
-class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
+{
     @IBOutlet var tblCompany: UITableView!
     @IBOutlet var txtSearch: UITextField!
-    
     var arrCompany = NSMutableArray()
-    override func viewDidLoad() {
+    var strTitleofCash = String()
+    var iTotoalCash = NSNumber()
+
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         SJSwiftSideMenuController.enableDimBackground = true
         SJSwiftSideMenuController.enableSwipeGestureWithMenuSide(menuSide: .LEFT)
-
+        self.getUserCompanies()
     }
     
     func getUserCompanies()
@@ -31,9 +35,8 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
         
         let token = final .value(forKey: "userToken")
         let headers = ["Authorization":"Bearer \(token!)"]
-        let parameters: [String: Any] = ["keyword": ""]
         
-        request(url, method: .post, parameters:parameters, headers: headers).responseJSON { (response:DataResponse<Any>) in
+        request(url, method: .get, parameters:nil, headers: headers).responseJSON { (response:DataResponse<Any>) in
             
             print(response.result.debugDescription)
             hideProgress()
@@ -59,7 +62,17 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
                         }
                         else
                         {
-                            self.arrCompany = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+//                            self.arrCompany = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                            if let dictdata = dictemp.value(forKey: "data") as? NSDictionary
+                            {
+                                if let arrcompanies = dictdata.value(forKey: "companies") as? NSArray
+                                {
+                                    self.arrCompany = NSMutableArray(array: arrcompanies)
+                                }
+                                self.strTitleofCash = dictdata.value(forKey: "label") as! String
+                                self.iTotoalCash = dictdata.value(forKey: "totalCash") as! NSNumber
+                            }
+                            self.tblCompany.reloadData()
                         }
                     }
                 }
@@ -67,6 +80,7 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
             case .failure(_):
                 print(response.result.error!)
                 self.arrCompany = NSMutableArray()
+                self.tblCompany.reloadData()
                 App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
                 break
             }
@@ -77,7 +91,7 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
-        setTemporaryData()
+//        setTemporaryData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -121,27 +135,33 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     //MARK:-
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return arrCompany.count + 1
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        if indexPath.row == 0
+        {
             return 50
         }
         return 48
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         var mainCell  = UITableViewCell()
         
-        if indexPath.row == 0 {
+        if indexPath.row == 0
+        {
             let cell : companyHeaderCell = tableView.dequeueReusableCell(withIdentifier: kCompanyHeaderIdentifier, for: indexPath) as! companyHeaderCell
             mainCell = cell
         }
@@ -149,17 +169,24 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
         {
             let cell : companyCell = tableView.dequeueReusableCell(withIdentifier: kCompanyCellIdentifier, for: indexPath) as! companyCell
             let dictEntity : NSDictionary = arrCompany[indexPath.row-1] as! NSDictionary
-            if let name = dictEntity.value(forKey: kCompanyNamKey) {
+            
+            if let name = dictEntity.value(forKey: ktitlekey)
+            {
                 cell.lblName.text = "\(name)"
             }
-            if let amount = dictEntity.value(forKey: kCompanyAmountKey) {
+            
+            if let amount = dictEntity.value(forKey: kamount)
+            {
                 cell.lblAmount.text = "\(amount)"
             }
-            if let percent = dictEntity.value(forKey: kCompanyPercentKey) {
-                cell.lblPercent.text = "\(percent)"
+            
+            if let percent = dictEntity.value(forKey: kCompanyPercentKey)
+            {
+                cell.lblPercent.text = "\(percent)%"
             }
             
-            if indexPath.row == arrCompany.count {
+            if indexPath.row == arrCompany.count
+            {
                 cell.imgSeperator.isHidden = true
             }
             else
@@ -169,20 +196,20 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
             
             mainCell = cell
         }
-        
-        
-        
         return mainCell
     }
 }
-class companyCell : UITableViewCell {
+
+class companyCell : UITableViewCell
+{
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblAmount: UILabel!
     @IBOutlet weak var lblPercent: UILabel!
     @IBOutlet weak var imgSeperator: UIImageView!
 }
 
-class companyHeaderCell : UITableViewCell {
+class companyHeaderCell : UITableViewCell
+{
     @IBOutlet weak var btnName: UIButton!
     @IBOutlet weak var btnAmount: UIButton!
     @IBOutlet weak var btnPercent: UIButton!

@@ -27,11 +27,14 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     var intRowHt : Int = 39
     
     var arrCompanyData = NSMutableArray()
+    var dictFundDetails = NSDictionary()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setTemporaryValues()
+//        setTemporaryValues()
+        self.getEntityDetails()
         
         //htMainContentVw.constant = 313
     }
@@ -51,7 +54,7 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     
     func setCompanyData()
     {
-        var arrTempArray = NSMutableArray()
+        let arrTempArray = NSMutableArray()
         arrTempArray.add([kEntityDetailCompanyNameKey: "Morgan Pvt",kEntityDetailCompanyAmountKey: "$45,000",kEntityDetailCompanyPerKey: "22%"])
         arrTempArray.add([kEntityDetailCompanyNameKey: "Reliance Capital Pvt",kEntityDetailCompanyAmountKey: "$30,000",kEntityDetailCompanyPerKey: "15%"])
         arrTempArray.add([kEntityDetailCompanyNameKey: "Morgan Chase",kEntityDetailCompanyAmountKey: "$85",kEntityDetailCompanyPerKey: "19%"])
@@ -86,15 +89,15 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     
     func getEntityDetails()
     {
-        /*let dic = UserDefaults.standard.value(forKey: kkeyLoginData)
+        let dic = UserDefaults.standard.value(forKey: kkeyLoginData)
         let final  = NSKeyedUnarchiver .unarchiveObject(with: dic as! Data) as! NSDictionary
         
-        let url = kServerURL + kGetDocumentsDetails
+        let url = kServerURL + kGetFundDetails
         showProgress(inView: self.view)
         
         let token = final .value(forKey: "userToken")
         let headers = ["Authorization":"Bearer \(token!)"]
-        let parameters: [String: Any] = ["categoryId": "\(dictCategory.value(forKey: "categoryId")!)"]
+        let parameters: [String: Any] = ["fundId": "\(dictFundDetails.value(forKey: "entityId")!)"]
         
         request(url, method: .post, parameters:parameters, headers: headers).responseJSON { (response:DataResponse<Any>) in
             
@@ -107,7 +110,6 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                 if response.result.value != nil
                 {
                     print(response.result.value!)
-                    
                     if let json = response.result.value
                     {
                         let dictemp = json as! NSDictionary
@@ -115,26 +117,57 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                         
                         if (dictemp.value(forKey: "error") != nil)
                         {
-                            self.arrDocument = NSMutableArray()
+                            self.arrCompanyData = NSMutableArray()
                             let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
                             App_showAlert(withMessage: msg as! String, inView: self)
                         }
                         else
                         {
-                            self.arrDocument = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
-                            self.tblDocumentDetail.reloadData()
+//                            self.arrCompanyData = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                            if let dictdata = dictemp.value(forKey: "data") as? NSDictionary
+                            {
+                                
+                                self.lblEntityName.text = dictdata.value(forKey: "fundTitle") as? String
+                                self.lblEntityDetail.text = dictdata.value(forKey: "description") as? String
+                                
+                                self.lblInceptionDate.text = dictdata.value(forKey: "inceptionDate") as? String
+                                self.lblFundSize.text = "$\(dictdata.value(forKey: "fundSize") as! NSNumber)"
+                                self.lblTotalInvested.text = "$\(dictdata.value(forKey: "totalInvested") as! NSNumber)"
+                                self.lblAssetClass.text = dictdata.value(forKey: "assetClass") as? String
+                                
+                                self.arrCompanyData = NSMutableArray()
+                                if let dictcompanies = dictdata.value(forKey: "companies") as? NSDictionary
+                                {
+                                    print(dictcompanies.allKeys)
+                                    let arrAllKeyData = dictcompanies.allKeys as NSArray
+                                    for i in 0..<arrAllKeyData.count
+                                    {
+                                        let dicttemp = NSMutableDictionary()
+                                        dicttemp.setValue(arrAllKeyData[i], forKey: kEntityDetailCompanyTitleNameKey)
+                                        dicttemp.setValue("0", forKey: "isSelected")
+                                        dicttemp.setValue(dictcompanies.value(forKey: arrAllKeyData[i] as! String), forKey: kEntityDetailCompanyArrKey)
+                                        self.arrCompanyData.add(dicttemp)
+                                    }
+                                }
+                            }
                         }
+                        
+                        self.htCompanyTable.constant = (CGFloat(self.arrCompanyData.count * 41))
+                        self.htMainContentVw.constant = 350 + self.htCompanyTable.constant
+                        self.tblCompany.reloadData()
                     }
                 }
                 break
             case .failure(_):
                 print(response.result.error!)
-                self.arrDocument = NSMutableArray()
-                self.tblDocumentDetail.reloadData()
+                self.arrCompanyData = NSMutableArray()
+                self.htCompanyTable.constant = (CGFloat(self.arrCompanyData.count * 41))
+                self.htMainContentVw.constant = 350 + self.htCompanyTable.constant
+                self.tblCompany.reloadData()
                 App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
                 break
             }
-        }*/
+        }
     }
 
     //MARK:- Button Click Action
@@ -158,7 +191,7 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         {
             if let arr = dict.value(forKey: kEntityDetailCompanyArrKey)
             {
-                let tmpArray = arr as! NSMutableArray
+                let tmpArray = arr as! NSArray
                 return tmpArray.count
             }
         }
@@ -173,8 +206,18 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     {
         let cell : headerCell = tableView.dequeueReusableCell(withIdentifier: kEntityDetailHeaderCellIdentifier) as! headerCell
         let dict : NSMutableDictionary = arrCompanyData[section] as! NSMutableDictionary
-        if let name = dict.value(forKey: kEntityDetailCompanyTitleNameKey){
+        if let name = dict.value(forKey: kEntityDetailCompanyTitleNameKey)
+        {
             cell.lblTitle.text = "\(name)"
+        }
+        
+        if dict.value(forKey: "isSelected") as! String == "1"
+        {
+            cell.btnAdd.isSelected = true
+        }
+        else
+        {
+            cell.btnAdd.isSelected = false
         }
         
         cell.btnAdd.addTarget(self, action: #selector(self.ExpandCell(_:)), for: .touchUpInside)
@@ -186,15 +229,29 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBAction func ExpandCell(_ sender: UIButton)
     {
         let dict  = arrCompanyData[sender.tag] as! NSMutableDictionary
-        dict.setValue("1", forKey: "isSelected")
-        arrCompanyData.replaceObject(at: sender.tag, with: dict)
+        if dict.value(forKey: "isSelected") as! String == "1"
+        {
+            dict.setValue("0", forKey: "isSelected")
+        }
+        else
+        {
+            dict.setValue("1", forKey: "isSelected")
+        }
         
         let resultPredicate = NSPredicate(format: "isSelected contains[c] %@", "1")
         let temparr = self.arrCompanyData.filtered(using: resultPredicate) as NSArray
         
-        htCompanyTable.constant = (CGFloat(arrCompanyData.count * 41)) + (CGFloat((temparr.count * 3) * 41))
-        htMainContentVw.constant = 350 + htCompanyTable.constant
+        self.htCompanyTable.constant = (CGFloat(self.arrCompanyData.count * 41))
+
+        for i in 0..<temparr.count
+        {
+            let dictMain : NSMutableDictionary = temparr[i] as! NSMutableDictionary
+            let arrCompany  = (dictMain.value(forKey: kEntityDetailCompanyArrKey) as! NSArray)
+            htCompanyTable.constant = self.htCompanyTable.constant + (CGFloat(arrCompany.count * 41))
+        }
         
+        htMainContentVw.constant = 350 + htCompanyTable.constant
+        arrCompanyData.replaceObject(at: sender.tag, with: dict)
         tblCompany.reloadData()
     }
     
@@ -216,13 +273,13 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         {
             cell.lblCompanyName.text = "\(name)"
         }
-        if let amount = dicCompany.value(forKey: kEntityDetailCompanyAmountKey)
+        if let amount = dicCompany.value(forKey: kamount)
         {
             cell.lblMoneyInvested.text = "\(amount)"
         }
-        if let percent = dicCompany.value(forKey: kEntityDetailCompanyPerKey)
+        if let percent = dicCompany.value(forKey: kCompanyPercentKey)
         {
-            cell.lblPercent.text = "\(percent)"
+            cell.lblPercent.text = "\(percent)%"
         }
         return cell
     }
