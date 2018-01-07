@@ -220,7 +220,7 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
                 cell.btnShow.addTarget(self, action: #selector (self.downClicked(sender:)), for: .touchUpInside)
                 
                 cell.lblTitle.text = "\(self.strTitleofCash)"
-                cell.lblAmount.text = "\(self.iTotoalCash)"
+                cell.lblAmount.text = "$\(self.iTotoalCash)"
                 
                 if isMore
                 {

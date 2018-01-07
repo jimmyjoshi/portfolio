@@ -111,8 +111,7 @@ class DocumentsViewController: UIViewController,UITableViewDelegate,UITableViewD
     }
     
     
-    //MARK:-
-    
+    //MARK:- tableview delegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -126,14 +125,21 @@ class DocumentsViewController: UIViewController,UITableViewDelegate,UITableViewD
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        let dictEntity : NSDictionary = arrDocument[indexPath.row] as! NSDictionary
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objFin : DocumentsDetailsVC = storyTab.instantiateViewController(withIdentifier: "DocumentsDetailsVC") as! DocumentsDetailsVC
+        objFin.dictCategory = dictEntity
+        self.navigationController?.pushViewController(objFin, animated: true)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell : documentCell = tableView.dequeueReusableCell(withIdentifier: kDocumentCellIdentifier, for: indexPath) as! documentCell
         let dictEntity : NSDictionary = arrDocument[indexPath.row] as! NSDictionary
         
-        if let title = dictEntity.value(forKey: ktitlekey) {
+        if let title = dictEntity.value(forKey: ktitlekey)
+        {
             cell.lblTitle.text = "\(title)"
         }
         

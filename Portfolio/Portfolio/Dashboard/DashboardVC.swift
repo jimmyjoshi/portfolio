@@ -198,7 +198,16 @@ class DashboardVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
         return 0
     }
 
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        let dictEntity : NSDictionary = arrNews[indexPath.row] as! NSDictionary
+        
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objFin : OpenEcternalLinkVC = storyTab.instantiateViewController(withIdentifier: "OpenEcternalLinkVC") as! OpenEcternalLinkVC
+        objFin.strURL = "\(dictEntity.value(forKey: "link")!)"
+        self.navigationController?.pushViewController(objFin, animated: true)
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Calculate the new page index depending on the content offset.
         let width = scrollView.bounds.width

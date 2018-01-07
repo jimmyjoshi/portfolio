@@ -74,7 +74,7 @@ let kdocumentCategories = "document-categories"
 let kGetNews = "get-news"
 let kGetFinancialSummary = "get-financial-summary"
 let kGetUserCompanies = "get-all-user-companies"
-
+let kGetDocumentsDetails = "get-documents-by-category"
 
 let kUserprofile = "user-profile-with-interest/"
 
@@ -141,7 +141,7 @@ var kIconKey = "icon"
 
 let ktitlekey = "title"
 let kdesignationkey = "designation"
-
+let kkeyexternallink = "external_link"
 
 //MARK:- Document Screen Constants
 var kDocumentCellIdentifier = "documentCell"

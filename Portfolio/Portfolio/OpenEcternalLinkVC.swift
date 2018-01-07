@@ -8,8 +8,8 @@
 
 import UIKit
 
-class OpenEcternalLinkVC: UIViewController {
-
+class OpenEcternalLinkVC: UIViewController,UIWebViewDelegate
+{
     @IBOutlet weak var webView : UIWebView!
     var strURL = String()
     
@@ -32,12 +32,12 @@ class OpenEcternalLinkVC: UIViewController {
     }
     
 
-    func webViewDidStartLoad(webView : UIWebView)
+    func webViewDidStartLoad(_ webView : UIWebView)
     {
         showProgress(inView: self.view)
     }
     
-    func webViewDidFinishLoad(webView : UIWebView)
+    func webViewDidFinishLoad(_ webView : UIWebView)
     {
         hideProgress()
     }

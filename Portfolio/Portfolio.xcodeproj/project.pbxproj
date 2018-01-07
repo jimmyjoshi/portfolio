@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30CE5B620024B2E00E91DD7 /* DocumentsDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30CE5B520024B2E00E91DD7 /* DocumentsDetailsVC.swift */; };
 		D3307B4A1F55D3B9007736A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3307B491F55D3B9007736A4 /* AppDelegate.swift */; };
 		D3307B4C1F55D3B9007736A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3307B4B1F55D3B9007736A4 /* ViewController.swift */; };
 		D3307B4F1F55D3B9007736A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3307B4D1F55D3B9007736A4 /* Main.storyboard */; };
@@ -90,6 +91,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D30CE5B520024B2E00E91DD7 /* DocumentsDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsDetailsVC.swift; sourceTree = "<group>"; };
 		D3307B461F55D3B9007736A4 /* Portfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Portfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3307B491F55D3B9007736A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3307B4B1F55D3B9007736A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				D57B9D311F62FB9100BE44FB /* TeamDetailViewController.swift */,
 				D57B9D331F6315EB00BE44FB /* EntityDetailViewController.swift */,
 				D3446FD520013A0D0093267C /* OpenEcternalLinkVC.swift */,
+				D30CE5B520024B2E00E91DD7 /* DocumentsDetailsVC.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				D3EDF1EB1F55D8F800D5D82D /* IQUIWindow+Hierarchy.swift in Sources */,
 				D3EDF1F51F55D8F800D5D82D /* IQUIView+IQKeyboardToolbar.swift in Sources */,
 				D3C9EB201FE55C8A00D5EEF7 /* SDWebImageCompat.m in Sources */,
+				D30CE5B620024B2E00E91DD7 /* DocumentsDetailsVC.swift in Sources */,
 				D3EDF1E71F55D8F800D5D82D /* IQUIScrollView+Additions.swift in Sources */,
 				D5902AE61F65645E00AE2F1A /* FinancialSummaryViewController.swift in Sources */,
 				D3307B4A1F55D3B9007736A4 /* AppDelegate.swift in Sources */,

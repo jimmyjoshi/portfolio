@@ -8,12 +8,15 @@
 
 import UIKit
 
-class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate
+{
     @IBOutlet var tblNews: UITableView!
     
     @IBOutlet var txtSearch: UITextField!
     var arrNews = NSMutableArray()
-    override func viewDidLoad() {
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
@@ -33,7 +36,16 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
         let token = final .value(forKey: "userToken")
         let headers = ["Authorization":"Bearer \(token!)"]
-        let parameters: [String: Any] = ["keyword": ""]
+        
+        var parameters = [String: Any]()
+        if (self.txtSearch.text?.isEmpty)!
+        {
+             parameters = ["keyword": ""]
+        }
+        else
+        {
+            parameters = ["keyword": "\(self.txtSearch.text!)"]
+        }
         
         request(url, method: .post, parameters:parameters, headers: headers).responseJSON { (response:DataResponse<Any>) in
             
@@ -111,16 +123,24 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
 
     }
     
-    @IBAction func btnSettingsClicked(sender: UIButton) {
-        
+    @IBAction func btnSettingsClicked(sender: UIButton)
+    {
     }
     
-    @IBAction func btnSearchClicked(sender: UIButton) {
+    @IBAction func btnSearchClicked(sender: UIButton)
+    {
         self.view.endEditing(true)
         print("Searching data")
-        
+        self.getNews()
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {   //delegate method
+        textField.resignFirstResponder()
+        self.getNews()
+        return true
+    }
+
     //MARK:-
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -142,24 +162,27 @@ class NewsViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let objFin : OpenEcternalLinkVC = storyTab.instantiateViewController(withIdentifier: "OpenEcternalLinkVC") as! OpenEcternalLinkVC
         objFin.strURL = "\(dictEntity.value(forKey: "link")!)"
         self.navigationController?.pushViewController(objFin, animated: true)
-
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell : newsCell = tableView.dequeueReusableCell(withIdentifier: kNewsCellIdentifier, for: indexPath) as! newsCell
         let dictEntity : NSDictionary = arrNews[indexPath.row] as! NSDictionary
         
-        if let title = dictEntity.value(forKey: kNewsTitleKey) {
+        if let title = dictEntity.value(forKey: kNewsTitleKey)
+        {
             cell.lblTitle.text = "\(title)"
             cell.lblTitle.sizeToFit()
         }
-        if let description = dictEntity.value(forKey: kNewsDescriptionKey) {
+        if let description = dictEntity.value(forKey: kNewsDescriptionKey)
+        {
             cell.lblDescription.text = "\(description)"
             cell.lblDescription.sizeToFit()
         }
-        if let date = dictEntity.value(forKey: kNewsDateKey) {
+        if let date = dictEntity.value(forKey: kNewsDateKey)
+        {
             cell.lblDate.text = "\(date)"
         }
+        cell.layoutIfNeeded()
         return cell
     }
 }
