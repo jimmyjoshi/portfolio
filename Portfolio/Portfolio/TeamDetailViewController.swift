@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class TeamDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class TeamDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,MFMailComposeViewControllerDelegate {
 
     @IBOutlet var imgVw: UIImageView!
     @IBOutlet var lblTeamName: UILabel!
@@ -19,10 +20,14 @@ class TeamDetailViewController: UIViewController,UITableViewDelegate,UITableView
     
     @IBOutlet var tblTeamMember: UITableView!
     var arrTeamMember = NSMutableArray()
-    override func viewDidLoad() {
+    var dictTeamDetails = NSDictionary()
+    var dictTeamInfo = NSDictionary()
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
-        lblTeamName.text = "Accell"
+       /* lblTeamName.text = "Accell"
         lblDescription.text = "Lorel Ipsum dolor view sit amet, consettinong adipiscing. Pellecitum so dales eros id maximum."
         
         lblAddress.text = "A 54, CenterMall, Near by Center Park, Mumbai 323001."
@@ -30,8 +35,86 @@ class TeamDetailViewController: UIViewController,UITableViewDelegate,UITableView
         lblWebsite.text = "www.accell.com"
         // Do any additional setup after loading the view.
         
-        setTemporaryData()
+        setTemporaryData()*/
+        self.getTeamDetails()
     }
+    
+    func getTeamDetails()
+    {
+        let dic = UserDefaults.standard.value(forKey: kkeyLoginData)
+        let final  = NSKeyedUnarchiver .unarchiveObject(with: dic as! Data) as! NSDictionary
+        
+        let url = kServerURL + kGetTeamDetails
+        showProgress(inView: self.view)
+        
+        let token = final .value(forKey: "userToken")
+        let headers = ["Authorization":"Bearer \(token!)"]
+        let parameters: [String: Any] = ["teamId": "\(dictTeamDetails.value(forKey: "teamId")!)"]
+        
+        request(url, method: .post, parameters:parameters, headers: headers).responseJSON { (response:DataResponse<Any>) in
+            
+            print(response.result.debugDescription)
+            hideProgress()
+            
+            switch(response.result)
+            {
+            case .success(_):
+                if response.result.value != nil
+                {
+                    print(response.result.value!)
+                    
+                    if let json = response.result.value
+                    {
+                        let dictemp = json as! NSDictionary
+                        print("dictemp :> \(dictemp)")
+                        
+                        if (dictemp.value(forKey: "error") != nil)
+                        {
+                            let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
+                            App_showAlert(withMessage: msg as! String, inView: self)
+                        }
+                        else
+                        {
+                            if let dictdata = dictemp.value(forKey: "data") as? NSDictionary
+                            {
+                                self.dictTeamInfo = (dictdata.value(forKey: "teamInfo") as? NSDictionary)!
+                                
+                                self.lblTeamName.text = self.dictTeamInfo["teamTitle"] as? String
+                                self.lblDescription.text = self.dictTeamInfo["teamDescription"] as? String
+                                
+                                self.lblAddress.text = self.dictTeamInfo["teamAddress"] as? String
+                                self.lblEmailId.text = self.dictTeamInfo["teamEmailId"] as? String
+                                self.lblWebsite.text = self.dictTeamInfo["teamWebsite"] as? String
+
+                                if let strimageLink = self.dictTeamInfo.value(forKey: "teamImage")
+                                {
+                                    let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
+                                    let url2 = URL(string: strURL)
+                                    if url2 != nil {
+                                        self.imgVw.sd_setImage(with: url2, placeholderImage: nil)
+                                    }
+                                }
+
+                                if let arrteamMembers = dictdata.value(forKey: "teamMembers") as? NSArray
+                                {
+                                    self.arrTeamMember = NSMutableArray(array: arrteamMembers)
+                                }
+                                self.tblTeamMember.reloadData()
+                            }
+                        }
+                    }
+                }
+                break
+            case .failure(_):
+                print(response.result.error!)
+                self.arrTeamMember = NSMutableArray()
+                self.tblTeamMember.reloadData()
+                App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
+                break
+            }
+        }
+    }
+
 
     func setTemporaryData() {
         arrTeamMember = NSMutableArray()
@@ -77,10 +160,16 @@ class TeamDetailViewController: UIViewController,UITableViewDelegate,UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : teamMemberCell = tableView.dequeueReusableCell(withIdentifier: kTeamMemberCellIdentifier, for: indexPath) as! teamMemberCell
         let dictEntity : NSDictionary = arrTeamMember[indexPath.row] as! NSDictionary
-        
-        if let img = dictEntity.value(forKey: kTeamMemberImageKey) {
-           
+
+        if let strimageLink = dictEntity.value(forKey: kTeamMemberImageKey)
+        {
+            let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
+            let url2 = URL(string: strURL)
+            if url2 != nil {
+                cell.imgPic.sd_setImage(with: url2, placeholderImage: nil)
+            }
         }
+
         if let name = dictEntity.value(forKey: kTeamMemberNameKey) {
             cell.lblName.text = "\(name)"
         }
@@ -94,6 +183,43 @@ class TeamDetailViewController: UIViewController,UITableViewDelegate,UITableView
         }
         return cell
     }
+    
+    //MARK: Send email
+    @IBAction func btnSendEmailAction(sender: AnyObject)
+    {
+        if MFMailComposeViewController.canSendMail()
+        {
+            let toRecipents = ["\(lblEmailId.text!)"]
+            let mc: MFMailComposeViewController = MFMailComposeViewController()
+            mc.mailComposeDelegate = self
+            mc.setToRecipients(toRecipents)
+            
+            self.present(mc, animated: true, completion: nil)
+        }
+        else
+        {
+            // show failure alert
+            App_showAlert(withMessage: "Your device could not send e-mail.  Please check e-mail configuration and try again.", inView: self)
+        }
+    }
+    
+    func mailComposeController(_ controller:MFMailComposeViewController, didFinishWith result:MFMailComposeResult, error:Error?)
+    {
+        switch result {
+        case .cancelled:
+            App_showAlert(withMessage: "Mail cancelled.", inView: self)
+        case .saved:
+            App_showAlert(withMessage: "Mail saved", inView: self)
+        case .sent:
+            App_showAlert(withMessage: "Mail sent", inView: self)
+        case .failed:
+            App_showAlert(withMessage: "Mail sent failure: \(String(describing: error?.localizedDescription))", inView: self)
+        default:
+            break
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+
 }
 
 class teamMemberCell : UITableViewCell {

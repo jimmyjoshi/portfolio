@@ -193,6 +193,14 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         tableView.deselectRow(at: indexPath, animated: true)
         let storyTab = UIStoryboard(name: "Main", bundle: nil)
         let objTeamDetail  : TeamDetailViewController = storyTab.instantiateViewController(withIdentifier: "TeamDetailViewController") as! TeamDetailViewController
+        if indexPath.section == 0
+        {
+            objTeamDetail.dictTeamDetails = arrTeam[indexPath.row] as! NSDictionary
+        }
+        else if indexPath.section == 1
+        {
+            objTeamDetail.dictTeamDetails = arrOutSideTeam[indexPath.row] as! NSDictionary
+        }
         self.navigationController?.pushViewController(objTeamDetail, animated: true)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell

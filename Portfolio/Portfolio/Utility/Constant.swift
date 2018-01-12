@@ -76,6 +76,7 @@ let kGetFinancialSummary = "get-financial-summary"
 let kGetUserCompanies = "get-all-user-companies"
 let kGetDocumentsDetails = "get-documents-by-category"
 let kGetFundDetails = "get-fund-details"
+let kGetTeamDetails = "get-team-details"
 
 let kUserprofile = "user-profile-with-interest/"
 
@@ -156,10 +157,10 @@ var kTeamImageKey = "Image"
 
 //MARK:- Team Detail Screen Constants
 var kTeamMemberCellIdentifier = "teamMemberCell"
-var kTeamMemberNameKey = "Name"
-var kTeamMemberImageKey = "Image"
-var kTeamMemberPostKey = "Post"
-var kTeamMemberContactNoKey = "PhoneNo"
+var kTeamMemberNameKey = "title"
+var kTeamMemberImageKey = "image"
+var kTeamMemberPostKey = "designation"
+var kTeamMemberContactNoKey = "contact_number"
 
 //MARK:- Company Screen Constants
 var kCompanyNamKey = "Name"
