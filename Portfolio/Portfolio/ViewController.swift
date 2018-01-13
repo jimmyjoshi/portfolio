@@ -97,7 +97,6 @@ class ViewController: UIViewController
                                 {
                                     UserDefaults.standard.set(false, forKey: kkeyisUserLogin)
                                 }
-                                
                                 UserDefaults.standard.synchronize()
                                 
                                 let storyTab = UIStoryboard(name: "Main", bundle: nil)

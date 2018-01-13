@@ -47,18 +47,21 @@ class SideMenuController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: "Sidebar1", for: indexPath) as! Sidebar1
             cell.lblTitle.text = "Alex James"
             
-            let dic = UserDefaults.standard.value(forKey: kkeyLoginData)
-            let final  = NSKeyedUnarchiver .unarchiveObject(with: dic as! Data) as! NSDictionary
-
-            if let strimageLink = final.value(forKey: "profilePic")
+            if let dic = UserDefaults.standard.value(forKey: kkeyLoginData)
             {
-                let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
-                let url2 = URL(string: strURL)
-                if url2 != nil {
-                    cell.imgProfile.sd_setImage(with: url2, placeholderImage: nil)
+                if let final  = NSKeyedUnarchiver .unarchiveObject(with: dic as! Data) as? NSDictionary
+                {
+                    if let strimageLink = final.value(forKey: "profilePic")
+                    {
+                        let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
+                        let url2 = URL(string: strURL)
+                        if url2 != nil {
+                            cell.imgProfile.sd_setImage(with: url2, placeholderImage: nil)
+                        }
+                    }
                 }
             }
-
+            
             cell.selectionStyle = .none
             return cell
         }
