@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ContactsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class ContactsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate
+{
     @IBOutlet var tblNews: UITableView!
     @IBOutlet var txtSearch: UITextField!
     
     var arrContacts = NSMutableArray()
+    var arrMainContacts = NSMutableArray()
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -56,12 +58,13 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
                             let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
                             App_showAlert(withMessage: msg as! String, inView: self)
                             self.arrContacts = NSMutableArray()
+                            self.arrMainContacts  = NSMutableArray()
                             self.tblNews.reloadData()
-
                         }
                         else
                         {
                             self.arrContacts = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
+                            self.arrMainContacts = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
                             self.tblNews.reloadData()
                         }
                     }
@@ -70,6 +73,7 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
             case .failure(_):
                 print(response.result.error!)
                 self.arrContacts = NSMutableArray()
+                self.arrMainContacts  = NSMutableArray()
                 self.tblNews.reloadData()
                 App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
                 break
@@ -77,6 +81,9 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
     
+    
+    
+  
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
@@ -109,19 +116,63 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
 
     }
     
-    @IBAction func btnSettingsClicked(sender: UIButton) {
+    @IBAction func btnSettingsClicked(sender: UIButton)
+    {
         
     }
     
-    @IBAction func btnSearchClicked(sender: UIButton) {
+    @IBAction func btnSearchClicked(sender: UIButton)
+    {
         self.view.endEditing(true)
-        print("Searching data")
-        
+        txtSearch.resignFirstResponder()
+        self.searchdata()
     }
     
-    //MARK:-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {   //delegate method
+        textField.resignFirstResponder()
+        self.searchdata()
+        return true
+    }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
+    {
+        self.searchdata()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if (string.isEmpty)
+        {
+            self.arrContacts = self.arrMainContacts
+        }
+        else
+        {
+            let resultPredicate : NSPredicate = NSPredicate(format: "title contains[c] %@", string)
+            self.arrContacts = self.arrMainContacts.filtered(using: resultPredicate) as! NSMutableArray
+        }
+        self.tblNews.reloadData()
+        return true
+    }
+    
+    func searchdata()
+    {
+        if (self.txtSearch.text?.isEmpty)!
+        {
+            self.arrContacts = self.arrMainContacts
+        }
+        else
+        {
+            let resultPredicate : NSPredicate = NSPredicate(format: "title contains[c] %@", self.txtSearch.text!)
+            self.arrContacts = self.arrMainContacts.filtered(using: resultPredicate) as! NSMutableArray
+        }
+        self.tblNews.reloadData()
+    }
+    
+    //MARK:- tableview delegate
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
         return 1
     }
     
@@ -134,7 +185,8 @@ class ContactsViewController: UIViewController,UITableViewDataSource,UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell : contactCell = tableView.dequeueReusableCell(withIdentifier: kContactsCellIdentifier, for: indexPath) as! contactCell
         let dictEntity : NSDictionary = arrContacts[indexPath.row] as! NSDictionary
         

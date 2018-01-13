@@ -8,13 +8,15 @@
 
 import UIKit
 
-class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate
+{
     @IBOutlet var tblTeam: UITableView!
     @IBOutlet var txtSearch: UITextField!
     var arrTeam = NSMutableArray()
     var arrOutSideTeam = NSMutableArray()
-    
-    
+    var arrMainTeam = NSMutableArray()
+    var arrMainOutSideTeam = NSMutableArray()
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -60,8 +62,10 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                             let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
                             App_showAlert(withMessage: msg as! String, inView: self)
                             self.arrTeam = NSMutableArray()
+                            self.arrOutSideTeam  = NSMutableArray()
+                            self.arrMainTeam = NSMutableArray()
+                            self.arrMainOutSideTeam = NSMutableArray()
                             self.tblTeam.reloadData()
-
                         }
                         else
                         {
@@ -70,14 +74,14 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                                 if let arrInsideTeam = dictTeams.value(forKey: "insideTeam") as? NSArray
                                 {
                                     self.arrTeam = NSMutableArray(array: arrInsideTeam)
+                                    self.arrMainTeam = NSMutableArray(array: arrInsideTeam)
                                 }
-                                
                                 if let arrOutsideTeam = dictTeams.value(forKey: "outsideTeam") as? NSArray
                                 {
-                                    self.arrTeam = NSMutableArray(array: arrOutsideTeam)
+                                    self.arrOutSideTeam = NSMutableArray(array: arrOutsideTeam)
+                                    self.arrMainOutSideTeam = NSMutableArray(array: arrOutsideTeam)
                                 }
                             }
-
                             self.tblTeam.reloadData()
                         }
                     }
@@ -126,11 +130,58 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
-    @IBAction func btnSearchClicked(sender: UIButton) {
+    @IBAction func btnSearchClicked(sender: UIButton)
+    {
         self.view.endEditing(true)
         
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {   //delegate method
+        textField.resignFirstResponder()
+        self.searchdata()
+        return true
+    }
     
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
+    {
+        self.searchdata()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if (string.isEmpty)
+        {
+            self.arrTeam = self.arrMainTeam
+            self.arrOutSideTeam = self.arrMainOutSideTeam
+        }
+        else
+        {
+            let resultPredicate : NSPredicate = NSPredicate(format: "Name contains[c] %@", string)
+            self.arrTeam = self.arrMainTeam.filtered(using: resultPredicate) as! NSMutableArray
+            self.arrOutSideTeam = self.arrMainOutSideTeam.filtered(using: resultPredicate) as! NSMutableArray
+
+        }
+        self.tblTeam.reloadData()
+        return true
+    }
+    
+    func searchdata()
+    {
+        if (self.txtSearch.text?.isEmpty)!
+        {
+            self.arrTeam = self.arrMainTeam
+            self.arrOutSideTeam = self.arrMainOutSideTeam
+        }
+        else
+        {
+            let resultPredicate : NSPredicate = NSPredicate(format: "Name contains[c] %@", self.txtSearch.text!)
+            self.arrTeam = self.arrMainTeam.filtered(using: resultPredicate) as! NSMutableArray
+            self.arrOutSideTeam = self.arrMainOutSideTeam.filtered(using: resultPredicate) as! NSMutableArray
+        }
+        self.tblTeam.reloadData()
+    }
+
     //MARK:- Table View Delegate Methods
     func numberOfSections(in tableView: UITableView) -> Int
     {

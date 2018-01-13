@@ -8,13 +8,14 @@
 
 import UIKit
 
-class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
+class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate
 {
     @IBOutlet var tblCompany: UITableView!
     @IBOutlet var txtSearch: UITextField!
     var arrCompany = NSMutableArray()
     var strTitleofCash = String()
     var iTotoalCash = NSNumber()
+    var arrMainCompany = NSMutableArray()
 
     override func viewDidLoad()
     {
@@ -56,7 +57,7 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
                         if (dictemp.value(forKey: "error") != nil)
                         {
                             self.arrCompany = NSMutableArray()
-                            
+                             self.arrMainCompany = NSMutableArray()
                             let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
                             App_showAlert(withMessage: msg as! String, inView: self)
                         }
@@ -68,6 +69,7 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
                                 if let arrcompanies = dictdata.value(forKey: "companies") as? NSArray
                                 {
                                     self.arrCompany = NSMutableArray(array: arrcompanies)
+                                    self.arrMainCompany = NSMutableArray(array: arrcompanies)
                                 }
                                 self.strTitleofCash = dictdata.value(forKey: "label") as! String
                                 self.iTotoalCash = dictdata.value(forKey: "totalCash") as! NSNumber
@@ -80,6 +82,7 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
             case .failure(_):
                 print(response.result.error!)
                 self.arrCompany = NSMutableArray()
+                self.arrMainCompany = NSMutableArray()
                 self.tblCompany.reloadData()
                 App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
                 break
@@ -128,13 +131,57 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
         
     }
     
-    @IBAction func btnSearchClicked(sender: UIButton) {
+    @IBAction func btnSearchClicked(sender: UIButton)
+    {
         self.view.endEditing(true)
         print("Searching data")
-        
+        txtSearch.resignFirstResponder()
+        self.searchdata()
+    }
+    //MARK: TextField Delegate Methods
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {   //delegate method
+        textField.resignFirstResponder()
+        self.searchdata()
+        return true
     }
     
-    //MARK:-
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
+    {
+        self.searchdata()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if (string.isEmpty)
+        {
+            self.arrCompany = self.arrMainCompany
+        }
+        else
+        {
+            let resultPredicate : NSPredicate = NSPredicate(format: "title contains[c] %@", string)
+            self.arrCompany = self.arrMainCompany.filtered(using: resultPredicate) as! NSMutableArray
+        }
+        self.tblCompany.reloadData()
+        return true
+    }
+    
+    func searchdata()
+    {
+        if (self.txtSearch.text?.isEmpty)!
+        {
+            self.arrCompany = self.arrMainCompany
+        }
+        else
+        {
+            let resultPredicate : NSPredicate = NSPredicate(format: "title contains[c] %@", self.txtSearch.text!)
+            self.arrCompany = self.arrMainCompany.filtered(using: resultPredicate) as! NSMutableArray
+        }
+        self.tblCompany.reloadData()
+    }
+    
+    //MARK:- tableview delegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
