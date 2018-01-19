@@ -183,3 +183,6 @@ let kcompanyCategoryTitle = "companyCategoryTitle"
 let kamount = "amount"
 let kkeynotes = "notes"
 
+let kkeyDataKey = "Data"
+let kkeyisExpand = "Expand"
+let kkeyRowCountKey = "RowCount"

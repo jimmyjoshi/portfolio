@@ -146,7 +146,7 @@
 		D3C9EB181FE55C8A00D5EEF7 /* UIView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCache.m"; sourceTree = "<group>"; };
 		D3C9EB191FE55C8A00D5EEF7 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		D3C9EB1A1FE55C8A00D5EEF7 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		D3DCA04C1F5727600070869A /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		D3DCA04C1F5727600070869A /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordVC.swift; path = ../ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		D3DCA04F1F57320F0070869A /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		D3EDF1711F55D8F700D5D82D /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		D3EDF1721F55D8F700D5D82D /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -249,7 +249,6 @@
 				D3307B5B1F55D5DB007736A4 /* Sidebar */,
 				D3307B491F55D3B9007736A4 /* AppDelegate.swift */,
 				D3307B4B1F55D3B9007736A4 /* ViewController.swift */,
-				D3DCA04C1F5727600070869A /* ForgotPasswordVC.swift */,
 				D3307B4D1F55D3B9007736A4 /* Main.storyboard */,
 				D3307B501F55D3B9007736A4 /* Assets.xcassets */,
 				D3307B521F55D3B9007736A4 /* LaunchScreen.storyboard */,
@@ -274,6 +273,7 @@
 		D3307B5B1F55D5DB007736A4 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				D3DCA04C1F5727600070869A /* ForgotPasswordVC.swift */,
 				D3307B5E1F55D67E007736A4 /* SideMenuController.swift */,
 				D3307B5C1F55D5DB007736A4 /* SJSwiftSideMenuController.swift */,
 			);

@@ -28,7 +28,8 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     
     var arrCompanyData = NSMutableArray()
     var dictFundDetails = NSDictionary()
-    
+    var dictMain = NSDictionary()
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -82,7 +83,9 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         htMainContentVw.constant = 350 + htCompanyTable.constant
         tblCompany.reloadData()
     }
-    override func didReceiveMemoryWarning() {
+    
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -127,6 +130,7 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                             if let dictdata = dictemp.value(forKey: "data") as? NSDictionary
                             {
                                 
+                                self.dictMain = dictdata
                                 self.lblEntityName.text = dictdata.value(forKey: "fundTitle") as? String
                                 self.lblEntityDetail.text = dictdata.value(forKey: "description") as? String
                                 
@@ -171,7 +175,8 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     }
 
     //MARK:- Button Click Action
-    @IBAction func btnMenuClicked(sender: UIButton) {
+    @IBAction func btnMenuClicked(sender: UIButton)
+    {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
@@ -179,6 +184,15 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     {
         
     }
+    
+    @IBAction func btnGotoFundDetails(sender: UIButton)
+    {
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objEntityDetail  : FundDetailVC = storyTab.instantiateViewController(withIdentifier: "FundDetailVC") as! FundDetailVC
+        objEntityDetail.dictFundDetails = self.dictMain
+        self.navigationController?.pushViewController(objEntityDetail, animated: true)
+    }
+
     //MARK:- Table View Delegate Method
     func numberOfSections(in tableView: UITableView) -> Int {
         return arrCompanyData.count
