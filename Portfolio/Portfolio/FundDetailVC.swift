@@ -11,6 +11,7 @@ import UIKit
 class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
 {
     @IBOutlet weak var tblFinance: UITableView!
+    @IBOutlet weak var lblScreenTitle: UILabel!
 
     var dictFundDetails = NSDictionary()
     var arrCompanyData = NSMutableArray()
@@ -28,6 +29,7 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.tblFinance.estimatedRowHeight = 200.0
         self.tblFinance.rowHeight = UITableViewAutomaticDimension
 
+        lblScreenTitle.text = "\(self.dictFundDetails.value(forKey: "fundTitle")!) Details"
         self.getFundDetails()
     }
     func getFundDetails()
@@ -154,6 +156,11 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
 //                                self.arrMainData.add([kHeaderTitleKey: "Cash Summary",kFinancialDetailArrKey: self.arrCash])
 //                                self.arrFinancialData.add([kHeaderTitleKey: "Financial Statement",kFinancialDetailArrKey: self.arrStatement])
 //                                self.arrFinancialData.add([kHeaderTitleKey: "Tax Document",kFinancialDetailArrKey: self.arrTaxDocument])
+                                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                                DispatchQueue.main.asyncAfter(deadline: when)
+                                {
+                                    self.tblFinance.reloadData()
+                                }
                             }
                         }
                     }
@@ -173,7 +180,7 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
     {
         _ = self.navigationController?.popViewController(animated: true)
     }
-
+    
     //MARK:- Table View Delegates
     func numberOfSections(in tableView: UITableView) -> Int
     {
@@ -244,6 +251,19 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
             {
                 let cell : fundDetailTitleCell = tableView.dequeueReusableCell(withIdentifier: "fundDetailTitleCell", for: indexPath) as! fundDetailTitleCell
                 cell.lblTitle.text = "\(dictrowdata.value(forKey: kHeaderTitleKey)!)"
+                cell.btnShow.addTarget(self, action: #selector(self.collapseexpandCell(_:event:)), for: .touchUpInside)
+                
+                if dictrowdata.value(forKey: kkeyisExpand) as! Int == 1
+                {
+                    cell.btnShow.isSelected = true
+                    cell.imgBottomView.isHidden = false
+                }
+                else
+                {
+                    cell.btnShow.isSelected = false
+                    cell.imgBottomView.isHidden = true
+                }
+                
                 mainCell = cell
             }
             else
@@ -253,6 +273,20 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                 let cell : fundDetailContactCell = tableView.dequeueReusableCell(withIdentifier: "fundDetailContactCell", for: indexPath) as! fundDetailContactCell
                 cell.lblTitle.text = "\(dicContact.value(forKey: "title")!)"
                 cell.lblSubTitle.text = "\(dicContact.value(forKey: "company")!)"
+                
+                if indexPath.row == (dictrowdata.value(forKey: kkeyDataKey) as! NSMutableArray).count
+                {
+                    let rectShape = CAShapeLayer()
+                    rectShape.bounds = cell.vwContentCell.frame
+                    rectShape.position = cell.vwContentCell.center
+                    rectShape.path = UIBezierPath(roundedRect: cell.vwContentCell.bounds, byRoundingCorners: [.bottomLeft , .bottomRight], cornerRadii: CGSize(width: 5, height: 5)).cgPath
+                    
+                    cell.vwContentCell.layer.backgroundColor = UIColor.white.cgColor
+                    cell.vwContentCell.layer.mask = rectShape
+                }
+                cell.contentView.setNeedsLayout()
+                cell.contentView.layoutIfNeeded()
+
                 mainCell = cell
             }
         }
@@ -263,6 +297,18 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
             {
                 let cell : fundDetailTitleCell = tableView.dequeueReusableCell(withIdentifier: "fundDetailTitleCell", for: indexPath) as! fundDetailTitleCell
                 cell.lblTitle.text = "\(dictrowdata.value(forKey: kHeaderTitleKey)!)"
+                cell.btnShow.addTarget(self, action: #selector(self.collapseexpandCell(_:event:)), for: .touchUpInside)
+                if dictrowdata.value(forKey: kkeyisExpand) as! Int == 1
+                {
+                    cell.btnShow.isSelected = true
+                    cell.imgBottomView.isHidden = false
+                }
+                else
+                {
+                    cell.btnShow.isSelected = false
+                    cell.imgBottomView.isHidden = true
+                }
+
                 mainCell = cell
             }
             else
@@ -273,6 +319,18 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                 cell.lblTitle.text = "\(dicContact.value(forKey: "title")!)"
                 cell.lblSubTitle.text = "\(dicContact.value(forKey: "description")!)"
                 cell.lblOrganisation.text = "\(dicContact.value(forKey: "category")!)"
+                
+                if indexPath.row == (dictrowdata.value(forKey: kkeyDataKey) as! NSMutableArray).count
+                {
+                    let rectShape = CAShapeLayer()
+                    rectShape.bounds = cell.vwContentCell.frame
+                    rectShape.position = cell.vwContentCell.center
+                    rectShape.path = UIBezierPath(roundedRect: cell.vwContentCell.bounds, byRoundingCorners: [.bottomLeft , .bottomRight], cornerRadii: CGSize(width: 5, height: 5)).cgPath
+                    
+                    cell.vwContentCell.layer.backgroundColor = UIColor.white.cgColor
+                    cell.vwContentCell.layer.mask = rectShape
+                }
+
                 mainCell = cell
             }
         }
@@ -283,6 +341,18 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
             {
                 let cell : fundDetailTitleCell = tableView.dequeueReusableCell(withIdentifier: "fundDetailTitleCell", for: indexPath) as! fundDetailTitleCell
                 cell.lblTitle.text = "\(dictrowdata.value(forKey: kHeaderTitleKey)!)"
+                cell.btnShow.addTarget(self, action: #selector(self.collapseexpandCell(_:event:)), for: .touchUpInside)
+                if dictrowdata.value(forKey: kkeyisExpand) as! Int == 1
+                {
+                    cell.btnShow.isSelected = true
+                    cell.imgBottomView.isHidden = false
+                }
+                else
+                {
+                    cell.btnShow.isSelected = false
+                    cell.imgBottomView.isHidden = true
+                }
+
                 mainCell = cell
             }
             else
@@ -290,9 +360,22 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                 let dicContact : NSDictionary = (dictrowdata.value(forKey: kkeyDataKey) as! NSMutableArray).object(at: indexPath.row-1) as! NSDictionary
                 
                 let cell : fundDetailNotesCell = tableView.dequeueReusableCell(withIdentifier: "fundDetailNotesCell", for: indexPath) as! fundDetailNotesCell
-//                cell.lblDate.text = "\(dicContact.value(forKey: "created")!)"
+                cell.lblDate.text = "\(dicContact.value(forKey: "noteDate")!)"
                 cell.lblDescription.text = "\(dicContact.value(forKey: "description")!)"
                 cell.lblName.text = "-\(dicContact.value(forKey: "title_by")!)"
+                
+                if indexPath.row == (dictrowdata.value(forKey: kkeyDataKey) as! NSMutableArray).count
+                {
+                    let rectShape = CAShapeLayer()
+                    rectShape.bounds = cell.vwContentCell.frame
+                    rectShape.position = cell.vwContentCell.center
+                    rectShape.path = UIBezierPath(roundedRect: cell.vwContentCell.bounds, byRoundingCorners: [.bottomLeft , .bottomRight], cornerRadii: CGSize(width: 5, height: 5)).cgPath
+                    
+                    cell.vwContentCell.layer.backgroundColor = UIColor.white.cgColor
+                    cell.vwContentCell.layer.mask = rectShape
+                }
+                cell.layoutIfNeeded()
+                cell.layoutSubviews()
                 mainCell = cell
             }
         }
@@ -303,6 +386,19 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
             {
                 let cell : fundDetailTitleCell = tableView.dequeueReusableCell(withIdentifier: "fundDetailTitleCell", for: indexPath) as! fundDetailTitleCell
                 cell.lblTitle.text = "\(dictrowdata.value(forKey: kHeaderTitleKey)!)"
+                cell.btnShow.addTarget(self, action: #selector(self.collapseexpandCell(_:event:)), for: .touchUpInside)
+                
+                if dictrowdata.value(forKey: kkeyisExpand) as! Int == 1
+                {
+                    cell.btnShow.isSelected = true
+                    cell.imgBottomView.isHidden = false
+                }
+                else
+                {
+                    cell.btnShow.isSelected = false
+                    cell.imgBottomView.isHidden = true
+                }
+
                 mainCell = cell
             }
             else
@@ -313,13 +409,45 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                 cell.lblDate.text = "\(dicContact.value(forKey: "created")!)"
                 cell.lblDescription.text = "\(dicContact.value(forKey: "notes")!)"
                 cell.lblName.text = "-\(dicContact.value(forKey: "title")!)"
+                
+                if indexPath.row == (dictrowdata.value(forKey: kkeyDataKey) as! NSMutableArray).count
+                {
+                    let rectShape = CAShapeLayer()
+                    rectShape.bounds = cell.vwContentCell.frame
+                    rectShape.position = cell.vwContentCell.center
+                    rectShape.path = UIBezierPath(roundedRect: cell.vwContentCell.bounds, byRoundingCorners: [.bottomLeft , .bottomRight], cornerRadii: CGSize(width: 5, height: 5)).cgPath
+                    
+                    cell.vwContentCell.layer.backgroundColor = UIColor.white.cgColor
+                    cell.vwContentCell.layer.mask = rectShape
+                }
                 mainCell = cell
             }
         }
-
+        mainCell.contentView.backgroundColor = UIColor.clear
+        mainCell.layer.backgroundColor = UIColor.clear.cgColor
+        mainCell.contentView.layoutIfNeeded()
+        mainCell.contentView.setNeedsLayout()
         return mainCell
     }
 
+    @IBAction func collapseexpandCell(_ sender: Any, event: Any)
+    {
+        let touches = (event as AnyObject).allTouches!
+        let touch = touches?.first!
+        let currentTouchPosition = touch?.location(in: self.tblFinance)
+        var indexPath = self.tblFinance.indexPathForRow(at: currentTouchPosition!)!
+        
+        let dict : NSMutableDictionary = self.arrMainData[indexPath.section] as! NSMutableDictionary
+        if dict.value(forKey: kkeyisExpand) as! Int == 1
+        {
+            dict.setValue(0, forKey: kkeyisExpand)
+        }
+        else
+        {
+            dict.setValue(1, forKey: kkeyisExpand)
+        }
+        self.tblFinance.reloadData()
+    }
     
     override func didReceiveMemoryWarning()
     {
@@ -356,17 +484,20 @@ class fundDetailTitleCell : UITableViewCell
 }
 class fundDetailContactCell : UITableViewCell
 {
+    @IBOutlet weak var vwContentCell : UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblSubTitle: UILabel!
 }
 class fundDetailDocumentsCell : UITableViewCell
 {
+    @IBOutlet weak var vwContentCell : UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblSubTitle: UILabel!
     @IBOutlet weak var lblOrganisation: UILabel!
 }
 class fundDetailNotesCell : UITableViewCell
 {
+    @IBOutlet weak var vwContentCell : UIView!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var lblName: UILabel!
@@ -374,6 +505,7 @@ class fundDetailNotesCell : UITableViewCell
 }
 class fundDetailToDoCell : UITableViewCell
 {
+    @IBOutlet weak var vwContentCell : UIView!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var lblName: UILabel!
