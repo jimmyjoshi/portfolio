@@ -8,8 +8,9 @@
 
 import UIKit
 
-class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
+class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,CSPieChartDelegate,CSPieChartDataSource
 {
+
     @IBOutlet weak var tblFinance: UITableView!
     @IBOutlet weak var lblScreenTitle: UILabel!
 
@@ -19,9 +20,30 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
     var arrdocuments = NSMutableArray()
     var arrNotes = NSMutableArray()
     var arrtoDos = NSMutableArray()
+    var arrGraphData = NSMutableArray()
     var arrMainData = NSMutableArray()
     var dictMain = NSDictionary()
+    var dataList = NSMutableArray()
+    var colorList = NSMutableArray()
     
+   /* var dataList = [
+        CSPieChartData(key: "test1", value: 30),
+        CSPieChartData(key: "test2", value: 30),
+        CSPieChartData(key: "test3", value: 30),
+        CSPieChartData(key: "test4", value: 30),
+        CSPieChartData(key: "test5", value: 30),
+        CSPieChartData(key: "test6", value: 30)
+    ]
+    
+    var colorList: [UIColor] = [
+        .red,
+        .orange,
+        .yellow,
+        .green,
+        .blue,
+        .magenta
+    ]*/
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -62,7 +84,7 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                         
                         if (dictemp.value(forKey: "error") != nil)
                         {
-                            self.arrCompanyData = NSMutableArray()
+                            self.arrMainData = NSMutableArray()
                             let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
                             App_showAlert(withMessage: msg as! String, inView: self)
                         }
@@ -72,29 +94,7 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                             if let dictdata = dictemp.value(forKey: "data") as? NSDictionary
                             {
                                  self.dictMain = dictdata
-                                /*
-                                self.lblEntityName.text = dictdata.value(forKey: "fundTitle") as? String
-                                self.lblEntityDetail.text = dictdata.value(forKey: "description") as? String
                                 
-                                self.lblInceptionDate.text = dictdata.value(forKey: "inceptionDate") as? String
-                                self.lblFundSize.text = "$\(dictdata.value(forKey: "fundSize") as! NSNumber)"
-                                self.lblTotalInvested.text = "$\(dictdata.value(forKey: "totalInvested") as! NSNumber)"
-                                self.lblAssetClass.text = dictdata.value(forKey: "assetClass") as? String*/
-                                
-                                self.arrCompanyData = NSMutableArray()
-                                if let dictcompanies = dictdata.value(forKey: "companies") as? NSDictionary
-                                {
-                                    print(dictcompanies.allKeys)
-                                    let arrAllKeyData = dictcompanies.allKeys as NSArray
-                                    for i in 0..<arrAllKeyData.count
-                                    {
-                                        let dicttemp = NSMutableDictionary()
-                                        dicttemp.setValue(arrAllKeyData[i], forKey: kEntityDetailCompanyTitleNameKey)
-                                        dicttemp.setValue("0", forKey: "isSelected")
-                                        dicttemp.setValue(dictcompanies.value(forKey: arrAllKeyData[i] as! String), forKey: kEntityDetailCompanyArrKey)
-                                        self.arrCompanyData.add(dicttemp)
-                                    }
-                                }
                                 
                                 if let tempContacts = dictdata.value(forKey: "contacts") as? NSArray
                                 {
@@ -116,6 +116,11 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                                     self.arrtoDos = NSMutableArray(array: tempContacts)
                                 }
                                 
+                                if let tempContacts = dictdata.value(forKey: "graphData") as? NSArray
+                                {
+                                    self.arrGraphData = NSMutableArray(array: tempContacts)
+                                }
+                                
                                 var dictmainTemp = NSMutableDictionary()
                                 dictmainTemp.setValue("MainCell", forKey: kHeaderTitleKey)
                                 dictmainTemp.setValue("", forKey: kkeyDataKey)
@@ -130,6 +135,12 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                                 dictmainTemp.setValue(self.arrContactData.count, forKey: kkeyRowCountKey)
                                 self.arrMainData.add(dictmainTemp)
                                 
+                                dictmainTemp = NSMutableDictionary()
+                                dictmainTemp.setValue("Cap Table", forKey: kHeaderTitleKey)
+                                dictmainTemp.setValue(self.arrGraphData, forKey: kkeyDataKey)
+                                dictmainTemp.setValue(1, forKey: kkeyisExpand)
+                                dictmainTemp.setValue(2+self.arrGraphData.count, forKey: kkeyRowCountKey)
+                                self.arrMainData.add(dictmainTemp)
                                 
                                 dictmainTemp = NSMutableDictionary()
                                 dictmainTemp.setValue("Documents", forKey: kHeaderTitleKey)
@@ -151,12 +162,33 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                                 dictmainTemp.setValue(1, forKey: kkeyisExpand)
                                 dictmainTemp.setValue(self.arrtoDos.count, forKey: kkeyRowCountKey)
                                 self.arrMainData.add(dictmainTemp)
-
+                                
+                                for i in 0..<self.arrGraphData.count
+                                {
+                                    let dicContact : NSDictionary = self.arrGraphData[i] as! NSDictionary
+                                    self.dataList.add(CSPieChartData(key: "test\(i)", value: Double(dicContact.value(forKey: "percentage") as! NSNumber)))
+                                    self.colorList.add(UIColor(hexString:  "\(dicContact.value(forKey: "color")!)"))
+                                }
                                 self.tblFinance.reloadData()
 //                                self.arrMainData.add([kHeaderTitleKey: "Cash Summary",kFinancialDetailArrKey: self.arrCash])
 //                                self.arrFinancialData.add([kHeaderTitleKey: "Financial Statement",kFinancialDetailArrKey: self.arrStatement])
 //                                self.arrFinancialData.add([kHeaderTitleKey: "Tax Document",kFinancialDetailArrKey: self.arrTaxDocument])
+                                
+
                                 let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                                
+                                DispatchQueue.main.asyncAfter(deadline: when)
+                                {
+                                    let indexPath = IndexPath(row: self.arrtoDos.count, section: self.arrMainData.count-1)
+                                    self.tblFinance.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                                }
+
+//                                DispatchQueue.main.asyncAfter(deadline: when)
+//                                {
+//                                    let indexPath = IndexPath(row: 0, section: 0)
+//                                    self.tblFinance.scrollToRow(at: indexPath, at: .top, animated: false)
+//                                }
+
                                 DispatchQueue.main.asyncAfter(deadline: when)
                                 {
                                     self.tblFinance.reloadData()
@@ -195,6 +227,15 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
             if section == 0
             {
                 return 1
+            }
+            else if section == 2
+            {
+                if let arr = dict.value(forKey: kkeyDataKey)
+                {
+                    let tmpArray = arr as! NSMutableArray
+                    return tmpArray.count + 2
+                }
+                return 2
             }
             else
             {
@@ -272,7 +313,7 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                 
                 let cell : fundDetailContactCell = tableView.dequeueReusableCell(withIdentifier: "fundDetailContactCell", for: indexPath) as! fundDetailContactCell
                 cell.lblTitle.text = "\(dicContact.value(forKey: "title")!)"
-                cell.lblSubTitle.text = "\(dicContact.value(forKey: "company")!)"
+                cell.lblSubTitle.text = "\(dicContact.value(forKey: "designation")!)"
                 
                 if indexPath.row == (dictrowdata.value(forKey: kkeyDataKey) as! NSMutableArray).count
                 {
@@ -291,6 +332,63 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
             }
         }
         else if indexPath.section == 2
+        {
+            let dictrowdata : NSDictionary = self.arrMainData[indexPath.section] as! NSDictionary
+            if indexPath.row == 0
+            {
+                let cell : fundDetailTitleCell = tableView.dequeueReusableCell(withIdentifier: "fundDetailTitleCell", for: indexPath) as! fundDetailTitleCell
+                cell.lblTitle.text = "\(dictrowdata.value(forKey: kHeaderTitleKey)!)"
+                cell.btnShow.addTarget(self, action: #selector(self.collapseexpandCell(_:event:)), for: .touchUpInside)
+                if dictrowdata.value(forKey: kkeyisExpand) as! Int == 1
+                {
+                    cell.btnShow.isSelected = true
+                    cell.imgBottomView.isHidden = false
+                }
+                else
+                {
+                    cell.btnShow.isSelected = false
+                    cell.imgBottomView.isHidden = true
+                }
+                
+                mainCell = cell
+            }
+            else if indexPath.row == 1
+            {
+                let cell : fundeDetailPieChart = tableView.dequeueReusableCell(withIdentifier: "fundeDetailPieChart", for: indexPath) as! fundeDetailPieChart
+                cell.pieChart?.dataSource = self
+                cell.pieChart?.delegate = self
+                
+                cell.pieChart?.pieChartRadiusRate = 0.5
+                cell.pieChart?.pieChartLineLength = 12
+                cell.pieChart?.seletingAnimationType = .touch
+                
+                cell.pieChart?.show(animated: true)
+                
+                mainCell = cell
+            }
+            else
+            {
+                let dicContact : NSDictionary = (dictrowdata.value(forKey: kkeyDataKey) as! NSMutableArray).object(at: indexPath.row-2) as! NSDictionary
+                
+                let cell : fundDetailgraphData = tableView.dequeueReusableCell(withIdentifier: "fundDetailgraphData", for: indexPath) as! fundDetailgraphData
+                cell.lblTitle.text = "\(dicContact.value(forKey: "title")!)"
+                cell.lblSubTitle.text = "\(dicContact.value(forKey: "subTitle")!)"
+                cell.lblPercentage.text = "\(dicContact.value(forKey: "percentage")!)%"
+                
+                if indexPath.row == (dictrowdata.value(forKey: kkeyDataKey) as! NSMutableArray).count + 1
+                {
+                    let rectShape = CAShapeLayer()
+                    rectShape.bounds = cell.vwContentCell.frame
+                    rectShape.position = cell.vwContentCell.center
+                    rectShape.path = UIBezierPath(roundedRect: cell.vwContentCell.bounds, byRoundingCorners: [.bottomLeft , .bottomRight], cornerRadii: CGSize(width: 5, height: 5)).cgPath
+                    
+                    cell.vwContentCell.layer.backgroundColor = UIColor.white.cgColor
+                    cell.vwContentCell.layer.mask = rectShape
+                }
+                mainCell = cell
+            }
+        }
+        else if indexPath.section == 3
         {
             let dictrowdata : NSDictionary = self.arrMainData[indexPath.section] as! NSDictionary
             if indexPath.row == 0
@@ -334,7 +432,7 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                 mainCell = cell
             }
         }
-        else if indexPath.section == 3
+        else if indexPath.section == 4
         {
             let dictrowdata : NSDictionary = self.arrMainData[indexPath.section] as! NSDictionary
             if indexPath.row == 0
@@ -379,7 +477,7 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                 mainCell = cell
             }
         }
-        else if indexPath.section == 4
+        else if indexPath.section == 5
         {
             let dictrowdata : NSDictionary = self.arrMainData[indexPath.section] as! NSDictionary
             if indexPath.row == 0
@@ -419,6 +517,10 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
                     
                     cell.vwContentCell.layer.backgroundColor = UIColor.white.cgColor
                     cell.vwContentCell.layer.mask = rectShape
+                }
+                else
+                {
+                    cell.vwContentCell.layoutIfNeeded()
                 }
                 mainCell = cell
             }
@@ -464,8 +566,51 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource
         // Pass the selected object to the new view controller.
     }
     */
-
+    // MARK: - CSPieChartDelegate,CSPieChartDataSource
+    func didSelectedPieChartComponent(at index: Int)
+    {
+        let data = dataList[index]
+//        print(data.key)
+    }
+    func numberOfComponentData() -> Int {
+        return dataList.count
+    }
+    
+    func pieChartComponentData(at index: Int) -> CSPieChartData {
+        return dataList[index] as! CSPieChartData
+    }
+    
+    func numberOfComponentColors() -> Int {
+        return colorList.count
+    }
+    
+    func pieChartComponentColor(at index: Int) -> UIColor {
+        return colorList[index] as! UIColor
+    }
+    
+    func numberOfLineColors() -> Int {
+        return colorList.count
+    }
+    
+    func pieChartLineColor(at index: Int) -> UIColor {
+        return colorList[index] as! UIColor
+    }
+    
+    func numberOfComponentSubViews() -> Int {
+        return dataList.count
+    }
+    
+    func pieChartComponentSubView(at index: Int) -> UIView
+    {
+        let view = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        let dicContact : NSDictionary = self.arrGraphData[index] as! NSDictionary
+        view.text = "\(dicContact.value(forKey: "title")!)"
+        view.font = UIFont.systemFont(ofSize: 12.0)
+        view.sizeToFit()
+        return view
+    }
 }
+
 //MARK: Cell Defination
 class fundDetailCell1 : UITableViewCell
 {
@@ -509,4 +654,15 @@ class fundDetailToDoCell : UITableViewCell
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var lblName: UILabel!
+}
+class fundeDetailPieChart: UITableViewCell
+{
+    @IBOutlet weak var pieChart: CSPieChart!
+}
+class fundDetailgraphData: UITableViewCell
+{
+    @IBOutlet weak var vwContentCell : UIView!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblSubTitle: UILabel!
+    @IBOutlet weak var lblPercentage: UILabel!
 }

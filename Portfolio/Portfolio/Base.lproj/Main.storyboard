@@ -4235,6 +4235,96 @@
                                             <outlet property="vwContentCell" destination="Kfp-QZ-jw5" id="PHY-jI-hcw"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fundeDetailPieChart" rowHeight="200" id="K5w-bb-uhY" userLabel="piechartcell" customClass="fundeDetailPieChart" customModule="Portfolio" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="490" width="320" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K5w-bb-uhY" id="cWe-cf-bLs">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dy4-cH-y0T" customClass="CSPieChart" customModule="Portfolio" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="200"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="200" id="sel-j7-tYf"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dy4-cH-y0T" firstAttribute="leading" secondItem="cWe-cf-bLs" secondAttribute="leading" constant="15" id="1Ar-WQ-VZu"/>
+                                                <constraint firstItem="dy4-cH-y0T" firstAttribute="centerX" secondItem="cWe-cf-bLs" secondAttribute="centerX" id="F6Q-XC-AlM"/>
+                                                <constraint firstAttribute="trailing" secondItem="dy4-cH-y0T" secondAttribute="trailing" constant="15" id="KFh-pZ-T7q"/>
+                                                <constraint firstItem="dy4-cH-y0T" firstAttribute="top" secondItem="cWe-cf-bLs" secondAttribute="top" id="PU1-vO-QWk"/>
+                                                <constraint firstAttribute="bottom" secondItem="dy4-cH-y0T" secondAttribute="bottom" id="dcT-D5-C1c"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="pieChart" destination="dy4-cH-y0T" id="UcX-4h-JSB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fundDetailgraphData" rowHeight="70" id="SfI-eJ-o2z" userLabel="GraphCell" customClass="fundDetailgraphData" customModule="Portfolio" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="690" width="320" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SfI-eJ-o2z" id="jGZ-NN-QlO">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPx-VR-DOo">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="70"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Total Cash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYc-S4-6Vd">
+                                                            <rect key="frame" x="8" y="8" width="274" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                            <color key="textColor" red="0.26274509800000001" green="0.29411764709999999" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Total Cash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQm-Qg-duk">
+                                                            <rect key="frame" x="8" y="42" width="166" height="20"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Total Cash" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esK-k3-I5O">
+                                                            <rect key="frame" x="182" y="41.5" width="100" height="20.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="100" id="kSz-YE-wqV"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                            <color key="textColor" red="0.95686966179999999" green="0.82787954809999997" blue="0.54947549100000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="XQm-Qg-duk" secondAttribute="bottom" constant="8" id="4aX-YY-lVs"/>
+                                                        <constraint firstItem="wYc-S4-6Vd" firstAttribute="leading" secondItem="xPx-VR-DOo" secondAttribute="leading" constant="8" id="8wQ-ru-18D"/>
+                                                        <constraint firstItem="esK-k3-I5O" firstAttribute="top" secondItem="wYc-S4-6Vd" secondAttribute="bottom" constant="3.5" id="B3s-Vt-bad"/>
+                                                        <constraint firstItem="XQm-Qg-duk" firstAttribute="leading" secondItem="xPx-VR-DOo" secondAttribute="leading" constant="8" id="C74-OW-GgR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="wYc-S4-6Vd" secondAttribute="trailing" constant="8" id="LLt-Dd-HXr"/>
+                                                        <constraint firstAttribute="bottom" secondItem="esK-k3-I5O" secondAttribute="bottom" constant="8" id="gw7-KQ-fNE"/>
+                                                        <constraint firstItem="esK-k3-I5O" firstAttribute="leading" secondItem="XQm-Qg-duk" secondAttribute="trailing" constant="8" id="hja-IP-Xr9"/>
+                                                        <constraint firstAttribute="trailing" secondItem="esK-k3-I5O" secondAttribute="trailing" constant="8" id="pmi-OW-Q7o"/>
+                                                        <constraint firstItem="XQm-Qg-duk" firstAttribute="top" secondItem="wYc-S4-6Vd" secondAttribute="bottom" constant="4" id="rXD-dF-icA"/>
+                                                        <constraint firstItem="wYc-S4-6Vd" firstAttribute="top" secondItem="xPx-VR-DOo" secondAttribute="top" constant="8" id="xjV-7r-H5d"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="xPx-VR-DOo" secondAttribute="trailing" constant="15" id="6sH-gr-IAF"/>
+                                                <constraint firstItem="xPx-VR-DOo" firstAttribute="leading" secondItem="jGZ-NN-QlO" secondAttribute="leading" constant="15" id="cQg-mg-SEg"/>
+                                                <constraint firstItem="xPx-VR-DOo" firstAttribute="top" secondItem="jGZ-NN-QlO" secondAttribute="top" id="mSd-5S-d1S"/>
+                                                <constraint firstAttribute="bottom" secondItem="xPx-VR-DOo" secondAttribute="bottom" id="vsl-JQ-Fwn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="lblPercentage" destination="esK-k3-I5O" id="RjF-wk-3dK"/>
+                                            <outlet property="lblSubTitle" destination="XQm-Qg-duk" id="6Cu-dx-I23"/>
+                                            <outlet property="lblTitle" destination="wYc-S4-6Vd" id="s15-ER-IP5"/>
+                                            <outlet property="vwContentCell" destination="xPx-VR-DOo" id="B2d-Jb-38k"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="flK-pA-IxV" id="wxx-za-pxU"/>

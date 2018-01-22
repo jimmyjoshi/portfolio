@@ -38,6 +38,12 @@
 		D3C9EB2B1FE55C8A00D5EEF7 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C9EB161FE55C8A00D5EEF7 /* UIImageView+WebCache.m */; };
 		D3C9EB2C1FE55C8A00D5EEF7 /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C9EB181FE55C8A00D5EEF7 /* UIView+WebCache.m */; };
 		D3C9EB2D1FE55C8A00D5EEF7 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C9EB1A1FE55C8A00D5EEF7 /* UIView+WebCacheOperation.m */; };
+		D3CA8A8820149652003DDEC8 /* CSPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA8A8220149652003DDEC8 /* CSPieChart.swift */; };
+		D3CA8A8920149652003DDEC8 /* CSPieChartComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA8A8320149652003DDEC8 /* CSPieChartComponent.swift */; };
+		D3CA8A8A20149652003DDEC8 /* CSPieChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA8A8420149652003DDEC8 /* CSPieChartDataSource.swift */; };
+		D3CA8A8B20149652003DDEC8 /* CSPieChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA8A8520149652003DDEC8 /* CSPieChartDelegate.swift */; };
+		D3CA8A8C20149652003DDEC8 /* CSPieChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA8A8620149652003DDEC8 /* CSPieChartModel.swift */; };
+		D3CA8A8D20149652003DDEC8 /* Double+CSPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA8A8720149652003DDEC8 /* Double+CSPieChart.swift */; };
 		D3DCA04D1F5727600070869A /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DCA04C1F5727600070869A /* ForgotPasswordVC.swift */; };
 		D3DCA0501F57320F0070869A /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DCA04F1F57320F0070869A /* DashboardVC.swift */; };
 		D3EDF1D11F55D8F700D5D82D /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EDF1711F55D8F700D5D82D /* AppUtils.swift */; };
@@ -146,6 +152,12 @@
 		D3C9EB181FE55C8A00D5EEF7 /* UIView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCache.m"; sourceTree = "<group>"; };
 		D3C9EB191FE55C8A00D5EEF7 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		D3C9EB1A1FE55C8A00D5EEF7 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		D3CA8A8220149652003DDEC8 /* CSPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSPieChart.swift; sourceTree = "<group>"; };
+		D3CA8A8320149652003DDEC8 /* CSPieChartComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSPieChartComponent.swift; sourceTree = "<group>"; };
+		D3CA8A8420149652003DDEC8 /* CSPieChartDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSPieChartDataSource.swift; sourceTree = "<group>"; };
+		D3CA8A8520149652003DDEC8 /* CSPieChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSPieChartDelegate.swift; sourceTree = "<group>"; };
+		D3CA8A8620149652003DDEC8 /* CSPieChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSPieChartModel.swift; sourceTree = "<group>"; };
+		D3CA8A8720149652003DDEC8 /* Double+CSPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+CSPieChart.swift"; sourceTree = "<group>"; };
 		D3DCA04C1F5727600070869A /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordVC.swift; path = ../ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		D3DCA04F1F57320F0070869A /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		D3EDF1711F55D8F700D5D82D /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
@@ -240,6 +252,7 @@
 		D3307B481F55D3B9007736A4 /* Portfolio */ = {
 			isa = PBXGroup;
 			children = (
+				D3CA8A8120149652003DDEC8 /* CSPieChart */,
 				D3C9EAF31FE55C8A00D5EEF7 /* SDWebImage */,
 				D3DCA04E1F5732000070869A /* Dashboard */,
 				D3EDF1701F55D8F700D5D82D /* Utility */,
@@ -334,6 +347,19 @@
 			);
 			name = SDWebImage;
 			path = Utility/SDWebImage;
+			sourceTree = "<group>";
+		};
+		D3CA8A8120149652003DDEC8 /* CSPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				D3CA8A8220149652003DDEC8 /* CSPieChart.swift */,
+				D3CA8A8320149652003DDEC8 /* CSPieChartComponent.swift */,
+				D3CA8A8420149652003DDEC8 /* CSPieChartDataSource.swift */,
+				D3CA8A8520149652003DDEC8 /* CSPieChartDelegate.swift */,
+				D3CA8A8620149652003DDEC8 /* CSPieChartModel.swift */,
+				D3CA8A8720149652003DDEC8 /* Double+CSPieChart.swift */,
+			);
+			path = CSPieChart;
 			sourceTree = "<group>";
 		};
 		D3DCA04E1F5732000070869A /* Dashboard */ = {
@@ -573,10 +599,12 @@
 				D3EDF1FC1F55D8F800D5D82D /* NetworkReachabilityManager.swift in Sources */,
 				D3C9EB261FE55C8A00D5EEF7 /* UIButton+WebCache.m in Sources */,
 				D3307B5F1F55D67E007736A4 /* SideMenuController.swift in Sources */,
+				D3CA8A8920149652003DDEC8 /* CSPieChartComponent.swift in Sources */,
 				D3C9EB2B1FE55C8A00D5EEF7 /* UIImageView+WebCache.m in Sources */,
 				D3EDF20B1F55D8F800D5D82D /* JVFloatLabeledTextView.m in Sources */,
 				D3C9EB1B1FE55C8A00D5EEF7 /* MKAnnotationView+WebCache.m in Sources */,
 				D3B0CA082005364100064BFA /* FundDetailVC.swift in Sources */,
+				D3CA8A8B20149652003DDEC8 /* CSPieChartDelegate.swift in Sources */,
 				D3C9EB221FE55C8A00D5EEF7 /* SDWebImageDownloader.m in Sources */,
 				D3EDF1E91F55D8F800D5D82D /* IQUIView+Hierarchy.swift in Sources */,
 				D57B9D341F6315EB00BE44FB /* EntityDetailViewController.swift in Sources */,
@@ -595,6 +623,7 @@
 				D3EDF1E71F55D8F800D5D82D /* IQUIScrollView+Additions.swift in Sources */,
 				D5902AE61F65645E00AE2F1A /* FinancialSummaryViewController.swift in Sources */,
 				D3307B4A1F55D3B9007736A4 /* AppDelegate.swift in Sources */,
+				D3CA8A8A20149652003DDEC8 /* CSPieChartDataSource.swift in Sources */,
 				D567EE9C1F5A816F00B647FF /* EntitiesViewController.swift in Sources */,
 				D3C9EB2C1FE55C8A00D5EEF7 /* UIView+WebCache.m in Sources */,
 				D3EDF1D21F55D8F700D5D82D /* Constant.swift in Sources */,
@@ -609,14 +638,17 @@
 				D59605CC1F5AC66100AE343B /* ContactsViewController.swift in Sources */,
 				D3EDF1EE1F55D8F800D5D82D /* IQKeyboardManager.swift in Sources */,
 				D3C9EB1D1FE55C8A00D5EEF7 /* NSImage+WebCache.m in Sources */,
+				D3CA8A8820149652003DDEC8 /* CSPieChart.swift in Sources */,
 				D3EDF2011F55D8F800D5D82D /* ResponseSerialization.swift in Sources */,
 				D3EDF1EC1F55D8F800D5D82D /* IQKeyboardManagerConstants.swift in Sources */,
+				D3CA8A8C20149652003DDEC8 /* CSPieChartModel.swift in Sources */,
 				D3EDF1FE1F55D8F800D5D82D /* ParameterEncoding.swift in Sources */,
 				D3EDF1F91F55D8F800D5D82D /* DispatchQueue+Alamofire.swift in Sources */,
 				D3EDF1F81F55D8F800D5D82D /* Alamofire.swift in Sources */,
 				D3C9EB231FE55C8A00D5EEF7 /* SDWebImageDownloaderOperation.m in Sources */,
 				D3C9EB1F1FE55C8A00D5EEF7 /* SDImageCacheConfig.m in Sources */,
 				D3C9EB2A1FE55C8A00D5EEF7 /* UIImageView+HighlightedWebCache.m in Sources */,
+				D3CA8A8D20149652003DDEC8 /* Double+CSPieChart.swift in Sources */,
 				D3EDF1E81F55D8F800D5D82D /* IQUITextFieldView+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
