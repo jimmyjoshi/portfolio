@@ -13,7 +13,7 @@ let MainScreen = UIScreen.main.bounds.size
 
 let appDelegate     = UIApplication.shared.delegate as! AppDelegate
 let userDefaults    = UserDefaults.standard
-let Application_Name  =  "Bonfire"
+let Application_Name  =  "Portfolio"
 let Alert_NoInternet    = "You are not connected to internet.\nPlease check your internet connection."
 let kPrivacyTermsVCViewID = "PrivacyTermsVC"
 let Alert_NoDataFound    = "No Data Found."

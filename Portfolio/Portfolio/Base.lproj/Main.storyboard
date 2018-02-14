@@ -249,7 +249,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="96"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9HV-Aq-sqe" id="klK-Ew-AAk">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="95.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TIA-8I-inL">
@@ -453,7 +453,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUE-22-ac1">
-                                                                <rect key="frame" x="45.5" y="66" width="38.5" height="36"/>
+                                                                <rect key="frame" x="45.5" y="60" width="38.5" height="36"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="38.5" id="6SC-jY-3NZ"/>
                                                                     <constraint firstAttribute="height" constant="36" id="fE7-E6-sBx"/>
@@ -473,7 +473,7 @@
                                                         <constraints>
                                                             <constraint firstItem="EUE-22-ac1" firstAttribute="centerX" secondItem="Irz-tH-90p" secondAttribute="centerX" id="0VM-ZO-oPB"/>
                                                             <constraint firstAttribute="bottom" secondItem="YxU-Na-Z5A" secondAttribute="bottom" id="437-vr-wmm"/>
-                                                            <constraint firstItem="EUE-22-ac1" firstAttribute="top" secondItem="Irz-tH-90p" secondAttribute="top" constant="66" id="CXH-nQ-swI"/>
+                                                            <constraint firstItem="EUE-22-ac1" firstAttribute="top" secondItem="Irz-tH-90p" secondAttribute="top" constant="60" id="CXH-nQ-swI"/>
                                                             <constraint firstItem="E4p-dy-Nzl" firstAttribute="leading" secondItem="Irz-tH-90p" secondAttribute="leading" constant="44" id="DwI-eV-VmC"/>
                                                             <constraint firstItem="kaO-0i-jpV" firstAttribute="top" secondItem="Irz-tH-90p" secondAttribute="top" constant="35" id="H61-Zf-Odu"/>
                                                             <constraint firstAttribute="height" constant="130" id="LJc-rZ-xvW"/>
