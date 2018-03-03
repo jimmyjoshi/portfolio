@@ -276,7 +276,7 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
             
             if indexPath.row == 0 {
                 cell.vwTop.isHidden = true
-                cell.vwBottom.isHidden = false
+                cell.vwBottom.isHidden = true
             }
             else if (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).count == (indexPath.row + 1) {
                 cell.vwTop.isHidden = false
@@ -305,7 +305,7 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
             let dicCompany : NSDictionary = (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).object(at: indexPath.row) as! NSDictionary
             if indexPath.row == 0 {
                 cell.vwTop.isHidden = true
-                cell.vwBottom.isHidden = false
+                cell.vwBottom.isHidden = true
             }
             else if (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).count == (indexPath.row + 1) {
                 cell.vwTop.isHidden = false

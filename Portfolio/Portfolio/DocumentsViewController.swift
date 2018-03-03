@@ -143,6 +143,7 @@ class DocumentsViewController: UIViewController,UITableViewDelegate,UITableViewD
             cell.lblTitle.text = "\(title)"
         }
         
+        /*
         if let strimageLink = dictEntity.value(forKey: kIconKey)
         {
             let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")
@@ -150,7 +151,7 @@ class DocumentsViewController: UIViewController,UITableViewDelegate,UITableViewD
             if url2 != nil {
                 cell.imgTopic.sd_setImage(with: url2, placeholderImage: nil)
             }
-        }
+        }*/
         return cell
     }
 }

@@ -62,7 +62,8 @@ let kFBAPPID = "128398547683260"
 
 
 //let kServerURL = "http://52.66.73.127/port-folio/public/api/"
-let kServerURL = "http://52.23.203.124/port-folio/public/api/"
+//let kServerURL = "http://52.23.203.124/port-folio/public/api/"
+let kServerURL = "http://35.154.84.230/portfolio/public/api/"
 
 
 let kforgotpassword = "forgotpassword"
