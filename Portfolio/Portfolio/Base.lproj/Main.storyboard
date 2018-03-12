@@ -3006,6 +3006,11 @@
                                                 <constraint firstAttribute="bottom" secondItem="214-Lw-dbo" secondAttribute="bottom" id="y9c-k8-Gyj"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="btnAmount" destination="vRh-h8-5Gp" id="4vg-aN-RHQ"/>
+                                            <outlet property="btnName" destination="KqS-aD-fTk" id="c6g-BR-Env"/>
+                                            <outlet property="btnPercent" destination="iIK-PS-iPt" id="S9j-KD-mA4"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="companyCell" rowHeight="48" id="TUn-vR-T0C" customClass="companyCell" customModule="Portfolio" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="78" width="290" height="48"/>

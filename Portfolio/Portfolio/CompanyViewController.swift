@@ -181,6 +181,28 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
         self.tblCompany.reloadData()
     }
     
+    @IBAction func sortArrayValues(_ sender: UIButton)
+    {
+        if sender.tag == 1
+        {
+            let descriptor: NSSortDescriptor = NSSortDescriptor(key: "title", ascending: false)
+            let sortedResults = arrCompany.sortedArray(using: [descriptor])
+            self.arrCompany = NSMutableArray(array: (sortedResults as AnyObject) as! NSArray)
+        }
+        else if sender.tag == 2
+        {
+            let descriptor: NSSortDescriptor = NSSortDescriptor(key: "amount", ascending: false)
+            let sortedResults = arrCompany.sortedArray(using: [descriptor])
+            self.arrCompany = NSMutableArray(array: (sortedResults as AnyObject) as! NSArray)
+        }
+        else
+        {
+            let descriptor: NSSortDescriptor = NSSortDescriptor(key: "percentage", ascending: false)
+            let sortedResults = arrCompany.sortedArray(using: [descriptor])
+            self.arrCompany = NSMutableArray(array: (sortedResults as AnyObject) as! NSArray)
+        }
+        tblCompany.reloadData()
+    }
     //MARK:- tableview delegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -201,6 +223,18 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        if indexPath.row == 0
+        {
+            
+        }
+        else
+        {
+            let storyTab = UIStoryboard(name: "Main", bundle: nil)
+            let objEntityDetail  : FundDetailVC = storyTab.instantiateViewController(withIdentifier: "FundDetailVC") as! FundDetailVC
+            objEntityDetail.dictFundDetails = arrCompany[indexPath.row-1] as! NSDictionary
+            self.navigationController?.pushViewController(objEntityDetail, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -210,6 +244,14 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
         if indexPath.row == 0
         {
             let cell : companyHeaderCell = tableView.dequeueReusableCell(withIdentifier: kCompanyHeaderIdentifier, for: indexPath) as! companyHeaderCell
+            
+            cell.btnName.addTarget(self, action: #selector(self.sortArrayValues(_:)), for: .touchUpInside)
+            cell.btnName.tag = 1
+            cell.btnAmount.addTarget(self, action: #selector(self.sortArrayValues(_:)), for: .touchUpInside)
+            cell.btnAmount.tag = 2
+            cell.btnPercent.addTarget(self, action: #selector(self.sortArrayValues(_:)), for: .touchUpInside)
+            cell.btnPercent.tag = 3
+            
             mainCell = cell
         }
         else

@@ -187,10 +187,11 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBAction func btnGotoFundDetails(sender: UIButton)
     {
+        /*
         let storyTab = UIStoryboard(name: "Main", bundle: nil)
         let objEntityDetail  : FundDetailVC = storyTab.instantiateViewController(withIdentifier: "FundDetailVC") as! FundDetailVC
         objEntityDetail.dictFundDetails = self.dictMain
-        self.navigationController?.pushViewController(objEntityDetail, animated: true)
+        self.navigationController?.pushViewController(objEntityDetail, animated: true)*/
     }
 
     //MARK:- Table View Delegate Method

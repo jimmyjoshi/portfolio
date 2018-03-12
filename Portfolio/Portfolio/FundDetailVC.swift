@@ -54,17 +54,18 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,C
         lblScreenTitle.text = "\(self.dictFundDetails.value(forKey: "fundTitle")!) Details"
         self.getFundDetails()
     }
+    
     func getFundDetails()
     {
         let dic = UserDefaults.standard.value(forKey: kkeyLoginData)
         let final  = NSKeyedUnarchiver .unarchiveObject(with: dic as! Data) as! NSDictionary
         
-        let url = kServerURL + kGetFundDetails
+        let url = kServerURL + kGetCompanyDetails
         showProgress(inView: self.view)
         
         let token = final .value(forKey: "userToken")
         let headers = ["Authorization":"Bearer \(token!)"]
-        let parameters: [String: Any] = ["fundId": "\(self.dictFundDetails.value(forKey: "fundId")!)"]
+        let parameters: [String: Any] = ["companyId": "\(self.dictFundDetails.value(forKey: "companyId")!)"]
         
         request(url, method: .post, parameters:parameters, headers: headers).responseJSON { (response:DataResponse<Any>) in
             
@@ -101,24 +102,24 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,C
                                     self.arrContactData = NSMutableArray(array: tempContacts)
                                 }
 
-                                if let tempContacts = dictdata.value(forKey: "documents") as? NSArray
+                                if let tempdocuments = dictdata.value(forKey: "documents") as? NSArray
                                 {
-                                    self.arrdocuments = NSMutableArray(array: tempContacts)
+                                    self.arrdocuments = NSMutableArray(array: tempdocuments)
                                 }
 
-                                if let tempContacts = dictdata.value(forKey: "notes") as? NSArray
+                                if let tempnotes = dictdata.value(forKey: "notes") as? NSArray
                                 {
-                                    self.arrNotes = NSMutableArray(array: tempContacts)
+                                    self.arrNotes = NSMutableArray(array: tempnotes)
                                 }
 
-                                if let tempContacts = dictdata.value(forKey: "toDos") as? NSArray
+                                if let temptoDos = dictdata.value(forKey: "toDos") as? NSArray
                                 {
-                                    self.arrtoDos = NSMutableArray(array: tempContacts)
+                                    self.arrtoDos = NSMutableArray(array: temptoDos)
                                 }
                                 
-                                if let tempContacts = dictdata.value(forKey: "graphData") as? NSArray
+                                if let tempgraphData = dictdata.value(forKey: "graphData") as? NSArray
                                 {
-                                    self.arrGraphData = NSMutableArray(array: tempContacts)
+                                    self.arrGraphData = NSMutableArray(array: tempgraphData)
                                 }
                                 
                                 var dictmainTemp = NSMutableDictionary()

@@ -79,6 +79,9 @@ let kGetDocumentsDetails = "get-documents-by-category"
 let kGetFundDetails = "get-fund-details"
 let kGetTeamDetails = "get-team-details"
 
+let kGetCompanyDetails = "get-company-details"
+
+
 let kUserprofile = "user-profile-with-interest/"
 
 
