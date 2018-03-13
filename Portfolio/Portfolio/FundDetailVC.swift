@@ -51,7 +51,6 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,C
         self.tblFinance.estimatedRowHeight = 200.0
         self.tblFinance.rowHeight = UITableViewAutomaticDimension
 
-        lblScreenTitle.text = "\(self.dictFundDetails.value(forKey: "fundTitle")!) Details"
         self.getFundDetails()
     }
     
@@ -96,6 +95,8 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,C
                             {
                                  self.dictMain = dictdata
                                 
+                                self.lblScreenTitle.text = "\(self.dictMain.value(forKey: "fundTitle")!)"
+
                                 
                                 if let tempContacts = dictdata.value(forKey: "contacts") as? NSArray
                                 {
@@ -277,7 +278,7 @@ class FundDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,C
             {
                 let cell : fundDetailCell1 = tableView.dequeueReusableCell(withIdentifier: "fundDetailCell1", for: indexPath) as! fundDetailCell1
                 
-                cell.lblTitle.text = "\(self.dictMain.value(forKey: "description")!)"
+                cell.lblTitle.text = "\(self.dictMain.value(forKey: "CompanyTitle")!)"
                 cell.lblDate.text = "\(self.dictMain.value(forKey: "inceptionDate")!)"
                 cell.lblAmount.text = "$\(dictMain.value(forKey: "totalInvested") as! NSNumber)"
                 let iPercentage = (Int((dictMain.value(forKey: "totalInvested") as! NSNumber)) * 100) / Int(dictMain.value(forKey: "fundSize") as! NSNumber)

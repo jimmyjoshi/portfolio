@@ -208,6 +208,22 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0
+        {
+            if indexPath.row ==  0
+            {
+            }
+            else
+            {
+                let dictMain : NSDictionary = arrFinancialData[indexPath.section] as! NSDictionary
+                let dicCompany : NSDictionary = (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).object(at: indexPath.row-1) as! NSDictionary
+                let storyTab = UIStoryboard(name: "Main", bundle: nil)
+                let objEntityDetail  : FundDetailVC = storyTab.instantiateViewController(withIdentifier: "FundDetailVC") as! FundDetailVC
+                objEntityDetail.dictFundDetails = dicCompany
+                
+                self.navigationController?.pushViewController(objEntityDetail, animated: true)
+            }
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
@@ -245,7 +261,7 @@ class FinancialSummaryViewController: UIViewController, UITableViewDelegate,UITa
                     cell.lblCompanyName.text = "\(name)"
                 }
                 if let amount = dicCompany.value(forKey: kamount) {
-                    cell.lblAmount.text = "\(amount)"
+                    cell.lblAmount.text = "$\(amount)"
                 }
                 
                 if (dictMain.value(forKey: kFinancialDetailArrKey) as! NSArray).count == (indexPath.row)

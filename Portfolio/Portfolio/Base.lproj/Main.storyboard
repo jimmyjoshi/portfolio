@@ -2386,14 +2386,34 @@
                                     <constraint firstAttribute="trailing" secondItem="0HT-Pe-kcD" secondAttribute="trailing" id="p41-Jq-dDj"/>
                                 </constraints>
                             </scrollView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="457-KU-iTE">
+                                <rect key="frame" x="0.0" y="66" width="320" height="464"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfE-IR-gHE">
+                                        <rect key="frame" x="160" y="231.5" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="kfE-IR-gHE" firstAttribute="centerX" secondItem="457-KU-iTE" secondAttribute="centerX" id="5bl-HS-AK2"/>
+                                    <constraint firstItem="kfE-IR-gHE" firstAttribute="centerY" secondItem="457-KU-iTE" secondAttribute="centerY" id="8QS-nA-d9d"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="c7x-pQ-NJZ" secondAttribute="trailing" id="45S-fK-2UH"/>
                             <constraint firstItem="eT1-VD-wm5" firstAttribute="top" secondItem="c7x-pQ-NJZ" secondAttribute="bottom" id="5WX-ab-8fd"/>
+                            <constraint firstAttribute="trailing" secondItem="457-KU-iTE" secondAttribute="trailing" id="8dj-Ha-aHa"/>
                             <constraint firstItem="c7x-pQ-NJZ" firstAttribute="top" secondItem="k9s-Za-263" secondAttribute="top" id="9FC-AX-Efb"/>
+                            <constraint firstItem="ULe-xr-sUv" firstAttribute="top" secondItem="457-KU-iTE" secondAttribute="bottom" id="DFA-h5-Dfc"/>
+                            <constraint firstItem="457-KU-iTE" firstAttribute="leading" secondItem="k9s-Za-263" secondAttribute="leading" id="Lif-mQ-0Em"/>
                             <constraint firstItem="eT1-VD-wm5" firstAttribute="leading" secondItem="k9s-Za-263" secondAttribute="leading" id="P7a-fN-b9p"/>
                             <constraint firstItem="c7x-pQ-NJZ" firstAttribute="leading" secondItem="k9s-Za-263" secondAttribute="leading" id="PSK-eg-NPP"/>
+                            <constraint firstItem="457-KU-iTE" firstAttribute="top" secondItem="c7x-pQ-NJZ" secondAttribute="bottom" id="fcZ-hk-Q2l"/>
                             <constraint firstAttribute="trailing" secondItem="eT1-VD-wm5" secondAttribute="trailing" id="hv0-4U-vos"/>
                             <constraint firstItem="ULe-xr-sUv" firstAttribute="top" secondItem="eT1-VD-wm5" secondAttribute="bottom" id="sCU-fk-Y9o"/>
                         </constraints>
@@ -2406,10 +2426,12 @@
                         <outlet property="lblAssetClass" destination="1GY-PT-y19" id="Vh2-0h-boH"/>
                         <outlet property="lblEntityDetail" destination="XKX-jz-Lsu" id="cQk-Jb-sPj"/>
                         <outlet property="lblEntityName" destination="7xQ-Eg-eX9" id="Vy0-XX-R72"/>
+                        <outlet property="lblErrorText" destination="kfE-IR-gHE" id="cw1-XX-7IO"/>
                         <outlet property="lblFundSize" destination="qwF-NM-4hh" id="hi7-mM-m5U"/>
                         <outlet property="lblInceptionDate" destination="QM6-k1-aZG" id="lzU-Wn-uZt"/>
                         <outlet property="lblTotalInvested" destination="2xm-dB-6Ys" id="76p-6e-hbq"/>
                         <outlet property="tblCompany" destination="WKb-hx-GBy" id="E51-Ya-lMA"/>
+                        <outlet property="vwError" destination="457-KU-iTE" id="x1a-2r-dCg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryO-9P-33U" userLabel="First Responder" sceneMemberID="firstResponder"/>

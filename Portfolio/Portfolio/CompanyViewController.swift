@@ -266,7 +266,7 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
             
             if let amount = dictEntity.value(forKey: kamount)
             {
-                cell.lblAmount.text = "\(amount)"
+                cell.lblAmount.text = "$\(amount)"
             }
             
             if let percent = dictEntity.value(forKey: kCompanyPercentKey)

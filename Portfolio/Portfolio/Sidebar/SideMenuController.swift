@@ -45,12 +45,18 @@ class SideMenuController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.row == 0
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Sidebar1", for: indexPath) as! Sidebar1
-            cell.lblTitle.text = "Alex James"
+            cell.lblTitle.text = ""
             
             if let dic = UserDefaults.standard.value(forKey: kkeyLoginData)
             {
                 if let final  = NSKeyedUnarchiver .unarchiveObject(with: dic as! Data) as? NSDictionary
                 {
+                    if let strname = final.value(forKey: "name")
+                    {
+                        cell.lblTitle.text = strname as? String
+                    }
+
+                    
                     if let strimageLink = final.value(forKey: "profilePic")
                     {
                         let strURL : String = (strimageLink as AnyObject).replacingOccurrences(of: " ", with: "%20")

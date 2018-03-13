@@ -29,12 +29,16 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     var arrCompanyData = NSMutableArray()
     var dictFundDetails = NSDictionary()
     var dictMain = NSDictionary()
+    
+    @IBOutlet weak var vwError: UIView!
+    @IBOutlet var lblErrorText: UILabel!
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 //        setTemporaryValues()
+        vwError.isHidden = true
         self.getEntityDetails()
         
         //htMainContentVw.constant = 313
@@ -120,12 +124,18 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                         
                         if (dictemp.value(forKey: "error") != nil)
                         {
+                            self.vwError.isHidden = false
                             self.arrCompanyData = NSMutableArray()
                             let msg = ((dictemp.value(forKey: "error") as! NSDictionary) .value(forKey: "reason"))
-                            App_showAlert(withMessage: msg as! String, inView: self)
+
+                            self.lblErrorText.text = "\(msg as! String)"
+
+//                            App_showAlert(withMessage: msg as! String, inView: self)
                         }
                         else
                         {
+                            self.vwError.isHidden = true
+
 //                            self.arrCompanyData = NSMutableArray(array: dictemp.value(forKey: "data") as! NSArray)
                             if let dictdata = dictemp.value(forKey: "data") as? NSDictionary
                             {
@@ -163,12 +173,16 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                 }
                 break
             case .failure(_):
+                self.vwError.isHidden = false
+
                 print(response.result.error!)
                 self.arrCompanyData = NSMutableArray()
                 self.htCompanyTable.constant = (CGFloat(self.arrCompanyData.count * 41))
                 self.htMainContentVw.constant = 350 + self.htCompanyTable.constant
                 self.tblCompany.reloadData()
-                App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
+                
+                self.lblErrorText.text = "\(response.result.error.debugDescription)"
+//                App_showAlert(withMessage: response.result.error.debugDescription, inView: self)
                 break
             }
         }
@@ -278,6 +292,14 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let dictMain : NSMutableDictionary = arrCompanyData[indexPath.section] as! NSMutableDictionary
+        let dicCompany : NSDictionary = (dictMain.value(forKey: kEntityDetailCompanyArrKey) as! NSArray).object(at: indexPath.row) as! NSDictionary
+        let storyTab = UIStoryboard(name: "Main", bundle: nil)
+        let objEntityDetail  : FundDetailVC = storyTab.instantiateViewController(withIdentifier: "FundDetailVC") as! FundDetailVC
+        objEntityDetail.dictFundDetails = dicCompany
+        
+        self.navigationController?.pushViewController(objEntityDetail, animated: true)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
@@ -290,7 +312,7 @@ class EntityDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         if let amount = dicCompany.value(forKey: kamount)
         {
-            cell.lblMoneyInvested.text = "\(amount)"
+            cell.lblMoneyInvested.text = "$\(amount)"
         }
         if let percent = dicCompany.value(forKey: kCompanyPercentKey)
         {
