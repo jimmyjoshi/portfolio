@@ -271,15 +271,20 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 }
             }
             
-            if let name = dictEntity.value(forKey: kCompanyNamKey)
+            if let name = dictEntity.value(forKey: kTeamMemberNameKey)
             {
                 cell.lblName.text = "\(name)"
             }
             
-            if let description = dictEntity.value(forKey: kDescriptionKey)
+            if let post = dictEntity.value(forKey: kTeamMemberPostKey)
             {
-                cell.lblDescription.text = "\(description)"
+                cell.lblDescription.text = "\(post)"
             }
+            if let no = dictEntity.value(forKey: kTeamMemberContactNoKey)
+            {
+                cell.lblContactNo.text = "\(no)"
+            }
+
         }
         else if indexPath.section == 1
         {
@@ -294,16 +299,21 @@ class TeamViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 }
             }
             
-            if let name = dictEntity.value(forKey: kCompanyNamKey)
+            if let name = dictEntity.value(forKey: kTeamMemberNameKey)
             {
                 cell.lblName.text = "\(name)"
             }
             
-            if let description = dictEntity.value(forKey: kDescriptionKey)
+            if let post = dictEntity.value(forKey: kTeamMemberPostKey)
             {
-                cell.lblDescription.text = "\(description)"
+                cell.lblDescription.text = "\(post)"
             }
-
+            
+            
+            if let no = dictEntity.value(forKey: kTeamMemberContactNoKey)
+            {
+                cell.lblContactNo.text = "\(no)"
+            }
         }
         
         return cell
@@ -315,6 +325,7 @@ class teamCell : UITableViewCell {
     @IBOutlet weak var imgPic: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
+    @IBOutlet weak var lblContactNo: UILabel!
 }
 
 

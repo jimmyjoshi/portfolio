@@ -2701,8 +2701,8 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Vivamus Porta g" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJa-XI-H7m">
-                                                            <rect key="frame" x="80" y="21" width="130.5" height="19"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJa-XI-H7m">
+                                                            <rect key="frame" x="80" y="15" width="0.0" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="H32-mg-v6Z"/>
                                                             </constraints>
@@ -2710,8 +2710,8 @@
                                                             <color key="textColor" red="0.26274509800000001" green="0.29411764709999999" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1L-8r-feU">
-                                                            <rect key="frame" x="80" y="41" width="202" height="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1L-8r-feU">
+                                                            <rect key="frame" x="80" y="35" width="202" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="Jbe-ZC-eoh"/>
                                                             </constraints>
@@ -2719,14 +2719,27 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHW-ZP-TfM">
+                                                            <rect key="frame" x="80" y="54" width="202" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="18" id="Qj7-So-7Rq"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <color key="textColor" red="0.89411764709999997" green="0.74509803919999995" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="uJa-XI-H7m" firstAttribute="leading" secondItem="Gls-zb-VgP" secondAttribute="trailing" constant="15" id="KBb-8D-5nQ"/>
                                                         <constraint firstItem="Gls-zb-VgP" firstAttribute="top" secondItem="ly4-Bb-M2T" secondAttribute="top" constant="15" id="NXa-HV-VTH"/>
+                                                        <constraint firstAttribute="bottom" secondItem="bHW-ZP-TfM" secondAttribute="bottom" constant="8" id="P9f-db-EqB"/>
                                                         <constraint firstItem="Gls-zb-VgP" firstAttribute="leading" secondItem="ly4-Bb-M2T" secondAttribute="leading" constant="15" id="PjQ-Hd-FcG"/>
-                                                        <constraint firstItem="uJa-XI-H7m" firstAttribute="top" secondItem="ly4-Bb-M2T" secondAttribute="top" constant="21" id="RIp-Uk-jiY"/>
+                                                        <constraint firstItem="uJa-XI-H7m" firstAttribute="top" secondItem="ly4-Bb-M2T" secondAttribute="top" constant="15" id="RIp-Uk-jiY"/>
+                                                        <constraint firstItem="bHW-ZP-TfM" firstAttribute="top" secondItem="C1L-8r-feU" secondAttribute="bottom" constant="1" id="TOV-Ph-0lp"/>
                                                         <constraint firstItem="C1L-8r-feU" firstAttribute="leading" secondItem="Gls-zb-VgP" secondAttribute="trailing" constant="15" id="bLX-Jw-v7V"/>
+                                                        <constraint firstAttribute="trailing" secondItem="bHW-ZP-TfM" secondAttribute="trailing" constant="8" id="ezt-AP-hwn"/>
+                                                        <constraint firstItem="bHW-ZP-TfM" firstAttribute="leading" secondItem="Gls-zb-VgP" secondAttribute="trailing" constant="15" id="oLT-FM-UkO"/>
                                                         <constraint firstAttribute="trailing" secondItem="C1L-8r-feU" secondAttribute="trailing" constant="8" id="qpe-mr-PJS"/>
                                                         <constraint firstItem="C1L-8r-feU" firstAttribute="top" secondItem="uJa-XI-H7m" secondAttribute="bottom" constant="1" id="sR2-su-zfk"/>
                                                     </constraints>
@@ -2748,6 +2761,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="imgPic" destination="Gls-zb-VgP" id="Due-YV-aRM"/>
+                                            <outlet property="lblContactNo" destination="bHW-ZP-TfM" id="XZF-0k-5gT"/>
                                             <outlet property="lblDescription" destination="C1L-8r-feU" id="eap-Pz-2Wd"/>
                                             <outlet property="lblName" destination="uJa-XI-H7m" id="ub1-Da-Joz"/>
                                         </connections>

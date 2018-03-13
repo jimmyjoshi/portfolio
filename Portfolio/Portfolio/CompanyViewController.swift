@@ -103,7 +103,8 @@ class CompanyViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     //MARK:- Tableview Delegate methods
     
-    func setTemporaryData() {
+    func setTemporaryData()
+    {
         arrCompany = NSMutableArray()
         arrCompany.add([kCompanyNamKey: "Avital",kCompanyAmountKey: "5000",kCompanyPercentKey: "10%"])
         arrCompany.add([kCompanyNamKey: "Aviva",kCompanyAmountKey: "10000",kCompanyPercentKey: "15%"])
