@@ -102,7 +102,7 @@ class DocumentsDetailsVC: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 75
+        return UITableViewAutomaticDimension
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
